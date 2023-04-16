@@ -2,6 +2,7 @@
 import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "./components/Home/Home"
 import Favorates from "./components/Favorates/Favorates"
@@ -34,6 +35,9 @@ function App() {
         {/* add your tests in the TEST div an HTML elment */}
         
         <div id='TEST'>
+         <NavBar/>
+
+           
         </div>
       </div>
     </Router>
