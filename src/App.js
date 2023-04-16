@@ -35,6 +35,7 @@ function App() {
         
         <div id='TEST'>
         </div>
+        <Search />
       </div>
     </Router>
   );
