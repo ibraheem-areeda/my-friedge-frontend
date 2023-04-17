@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <NavBar/> */}
+        <NavBar/>
         <Routes>
 
           <Route exact path='/' element={<></>}>
@@ -30,12 +30,12 @@ function App() {
           </Route>
 
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
 
         {/* add your tests in the TEST div an HTML elment */}
         
         <div id='TEST'>
-         <NavBar/>
+         
 
            
         </div>

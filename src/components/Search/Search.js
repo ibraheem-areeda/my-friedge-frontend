@@ -1,3 +1,4 @@
+import SearchResult from "../SearchResult/SearchResult";
 import Filter from "../Filter/Filter"
 import{ useState, useEffect } from 'react';
 export default function Search() {
@@ -31,6 +32,7 @@ export default function Search() {
 
     return(
         <>
+        <SearchResult data={searchRes} type={"choice"} source={"API"}/>
         <p>{`${searchRes}`}</p>
         <Filter searchRes={searchRes} />
         </>

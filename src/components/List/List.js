@@ -1,5 +1,5 @@
 
-import Card from "../Card/Card"
+import CardApp from "../Card/Card"
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
@@ -66,7 +66,7 @@ function List(props) {
         <Form>
             {data.map((obj, index) => {
                 if (showMore === true || index <= showLimit) {
-                    return (<Card data={obj} type={type} opirationsList={opirationsList} />);
+                    return (<CardApp data={obj} type={type} opirationsList={opirationsList} />);
                 }
                 else
                     return;

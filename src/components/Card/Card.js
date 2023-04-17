@@ -1,13 +1,10 @@
-
-
 import Button from 'react-bootstrap/Button';
-import { Card as bootCard } from 'react-bootstrap/Card';
+import  Card  from 'react-bootstrap/Card';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-
-function Card(props) {
+function CardApp(props) {
     let data = props.data;
     const [cardData, setCard] = useState(data);
     let type = props.type;
@@ -62,19 +59,19 @@ function Card(props) {
                 }
             </div>
 
-            <bootCard style={{ width: '18rem' }}>
-                <bootCard.Img variant="top" src="holder.js/100px180" />
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src="holder.js/100px180" />
 
-                <bootCard.Body>
-                    <bootCard.Title>{(type === "recipe") ? cardData.title : (type === 'ingredient' && source === 'API') ? cardData.name : cardData.item_name}</bootCard.Title>
+                <Card.Body>
+                    <Card.Title>{(type === "recipe") ? cardData.title : (type === 'ingredient' && source === 'API') ? cardData.name : cardData.item_name}</Card.Title>
                     <Card.Text>
                         {(type === "favorate") ? cardData.quantity : <></>}
                     </Card.Text>
-                </bootCard.Body>
+                </Card.Body>
 
-            </bootCard>
+            </Card>
         </div>
     );
 }
 
-export default Card;
+export default CardApp;
