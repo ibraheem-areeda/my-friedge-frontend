@@ -47,7 +47,7 @@ export default function Search() {
 //choice
     return(
         <>
-        <SearchResult data={testData} type={"recipe"} source={"API"}/>
+        <SearchResult data={testData} type={"choice"} source={"API"}/>
         <p>{`${testData}`}</p>
         <Filter searchRes={searchRes} />
         </>
