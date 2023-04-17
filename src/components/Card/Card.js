@@ -3,7 +3,7 @@ import './Card.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form'
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function getCardData(Card) {

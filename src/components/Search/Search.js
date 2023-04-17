@@ -1,9 +1,15 @@
+
 import SearchResult from "../SearchResult/SearchResult";
 import Filter from "../Filter/Filter"
-import{ useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import { useState, useEffect, useRef } from 'react';
+import Form from 'react-bootstrap/Form';
 
 export default function Search() {
-    let testData=[
+    const listParams = useRef([]);
+    console.log(listParams.current);
+    const [test, setTest] = useState(0);
+    const [searchRes, setSearchRes] = useState([
         {
             "id": 716429,
             "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
@@ -16,55 +22,37 @@ export default function Search() {
             "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
             "imageType": "jpg",
         }
-    ];
-    const [searchRes,setsearchRes]=useState([])
-    const [data, setData] = useState([]);
+    ])
 
-    function handleDataReceived (data) {
-        setData(data);
-        console.log(data);
-      }
+    async function getRecipes(element){
+        element.preventDefault();
+        console.log(new URLSearchParams(listParams).toString(),999999999999999999999);
+        const baseURL= "https://my-friedge.onrender.com";
+        const response = await fetch(`${baseURL}/complexSearch`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
 
-    async function getRecipes(){
-        
-
-        const url= `https://my-friedge.onrender.com/complexSearch?${data}&number=2`;
-       
-           console.log(11111111111,url);
-            
-            let response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                
-                },
-              
-               
-            })
-            
-            let recivedData = await response.json();
-            setsearchRes(recivedData)
-            
-            console.log(2222, recivedData)
-        
-
-    
-
+            },
+         } )
+        const searchRes = await response.json();
+        setSearchRes(searchRes);
+        console.log(searchRes);
     }
+ 
 
-    useEffect(()=>{
-        getRecipes();
-    },[])  
-
-//choice
-    return(
+    return (
         <>
+            <Form>
+                <Form.Control size="lg" type="text" placeholder="Large text" />
+                <Filter searchRes={searchRes} list={listParams} test={setTest}/>
+                <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
+            </Form>
 
-        <SearchResult data={testData} type={"choice"} source={"API"}/>
-        <Filter onDataReceived={handleDataReceived} />
-        <p>Data received from child: {data}</p>
-
+            <SearchResult data={searchRes} type={"ingredient"} source={"API"} />
+            <p>{`${searchRes}`}</p>
         </>
     )
 }
