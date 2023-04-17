@@ -40,9 +40,9 @@ function App() {
 
            
         </div>
-
+{/* 
         <Recipes/>
-        <StepByStepModal/>
+        <StepByStepModal/> */}
 
         <Search />
 

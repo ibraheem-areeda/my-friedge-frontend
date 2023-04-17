@@ -4,59 +4,74 @@ import CardApp from "../Card/Card"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import { useState, useRef, useEffect } from 'react';
+import { Modal } from "bootstrap";
 
+function RecipeStruct(obj) {
+    this.id = obj.id;
+    this.itme_image = obj.image;
+    this.title = obj.title;
+    this.userID = 1;
+}
 
+function IngredientStruct(obj) {
+    this.id = obj.id;
+    this.itme_image = obj.image;
+    this.item_name = obj.title;
+    this.quantity = obj.quantity;
+    this.userID = 1;
+}
 
 function List(props) {
+    
     let showLimit = 5;
     const [showMore, setShowMore] = useState(false);
     const opirationsList = useRef([]);
-
     function toggleShowMore() {
         setShowMore(!showMore);
     }
 
-    function executeOpirations() {
+    function executeOpirations(element) {
+        console.log(opirationsList);
+
+        if (props.type==="choice") {
+            props.modalCloseHandler();
+        }
+
         let baseURL = process.env.REACT_APP_SERVER_URL;
-        console.log(1111111111111, baseURL);
-        let updateURL = "/updateIngredient", addRecipeURL = "/addNewRecipe", addIngredientURL = "/addIngredient";
-
-        opirationsList.forEach(async (item) => {
-            if (item.opiration === "UPDATE") {
-                let response = await fetch(baseURL + updateURL, {
-                    method: 'PUT',
+        let updateURL ='/update' , deleteURL = "/delete", addURL = "/add";
+        element.preventDefault();
+        opirationsList.current.forEach(async (item,index) => {
+            
+            let method = (item.opiration === "UPDATE") ? 'PUT' : (item.opiration === "ADD") ? "POST" : 'DELETE'
+            let url = baseURL;
+            url += (item.opiration === "UPDATE") ? updateURL: (item.opiration === "ADD") ? addURL : deleteURL
+            
+            if (item.type === "ingredient" || item.type==="favorate") {
+                let response = await fetch(url+"Ingredient", {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
 
                     },
-                    query: JSON.stringify(item.data)
-                })
-            }
-            else if (item.type === "ingredient") {
-                let response = await fetch(baseURL + addIngredientURL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-
-                    },
-                    query: JSON.stringify(item.data)
+                    body: JSON.stringify(new IngredientStruct(item.data))
                 })
             }
             else {
-                let response = await fetch(baseURL + addRecipeURL, {
-                    method: 'POST',
+                let response = await fetch(url+"Recipe", {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
 
                     },
-                    query: JSON.stringify(item.data)
+                    body: JSON.stringify(new RecipeStruct(item.data))
                 })
             }
-
-        });
+            if (index===opirationsList.current.length-1) {
+                // window.location.reload();
+            }
+        })
 
     }
 
@@ -66,7 +81,7 @@ function List(props) {
         <Form>
             {data.map((obj, index) => {
                 if (showMore === true || index <= showLimit) {
-                    return (<CardApp data={obj} type={type} opirationsList={opirationsList} />);
+                    return (<CardApp data={obj} type={type} opirationsList={opirationsList} key={obj.id} choiceList={props.choiceList}/>);
                 }
                 else
                     return;

@@ -1,0 +1,23 @@
+.form-switch .form-check-input {
+    width: 5vh;
+    height: 3vh;
+}
+
+div.Card{
+    display: flex;
+    width: fit-content;
+}
+
+div.cardPlusMinus{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.gray{
+
+}
+
+.yellow .svg{
+    background-color: gold;
+}
