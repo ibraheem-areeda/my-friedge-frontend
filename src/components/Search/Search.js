@@ -1,6 +1,7 @@
 import SearchResult from "../SearchResult/SearchResult";
 import Filter from "../Filter/Filter"
 import{ useState, useEffect } from 'react';
+
 export default function Search() {
     let testData=[
         {
@@ -17,39 +18,53 @@ export default function Search() {
         }
     ];
     const [searchRes,setsearchRes]=useState([])
-    const [obj,setobj]=useState([])
+    const [data, setData] = useState([]);
 
-    // async function getRecipes(){
-       
-    //     setobj(obj)
-    //     const url= "https://my-friedge.onrender.com";
-    //     const response = await fetch(`${url}/complexSearch`,
-    //     {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json'
+    function handleDataReceived (data) {
+        setData(data);
+        console.log(data);
+      }
 
-    //         },
-    //         query: JSON.stringify(obj)
-    //      } )
-
-
+    async function getRecipes(){
         
-    //     const searchRes = await response.json();
-    //     setsearchRes(searchRes);
-    //     console.log(searchRes);
-    // }
 
-    // useEffect(()=>{
-    //     getRecipes();
-    // },[])  
+        const url= `https://my-friedge.onrender.com/complexSearch?${data}&number=2`;
+       
+           console.log(11111111111,url);
+            
+            let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                
+                },
+              
+               
+            })
+            
+            let recivedData = await response.json();
+            setsearchRes(recivedData)
+            
+            console.log(2222, recivedData)
+        
+
+    
+
+    }
+
+    useEffect(()=>{
+        getRecipes();
+    },[])  
+
 //choice
     return(
         <>
+
         <SearchResult data={testData} type={"choice"} source={"API"}/>
-        <p>{`${testData}`}</p>
-        <Filter searchRes={searchRes} />
+        <Filter onDataReceived={handleDataReceived} />
+        <p>Data received from child: {data}</p>
+
         </>
     )
 }
