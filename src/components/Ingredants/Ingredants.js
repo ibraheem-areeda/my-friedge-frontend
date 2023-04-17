@@ -1,72 +1,35 @@
+import { useEffect, useState } from 'react';
+import List from "../List/List"
+export default function Ingredants() {
 
-import List from '../List/List'
-import { useState } from 'react';
-import { button} from 'react-bootstrap';
+    const [favRecipes, setFavRecipes] = useState([]);
+    async function getFavRecipes(userID) {
+        let allRecipes = `https://my-friedge.onrender.com/allRecipes`;
+        
+        let response = await fetch(allRecipes, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            
+            },
+            query: JSON.stringify({userID:userID})
+        })
 
-
-function Ingredients() {
-  const [ingredients, setIngredients] = useState([]);
-  const [editedIngredients, setEditedIngredients] = useState([]);
-  const [showSaveButton, setShowSaveButton] = useState(false);
-
-  const handleIngredientClick = (ingredient) => {
-    if (editedIngredients.includes(ingredient)) {
-    
-      setEditedIngredients(editedIngredients.filter((i) => i !== ingredient));
-    } else {
-      
-      setEditedIngredients([...editedIngredients, ingredient]);
+        let recivedData = await response.json();
+        setFavRecipes(recivedData)
+        console.log(2222, recivedData)
     }
-    setShowSaveButton(true); 
-  };
+    useEffect(() => {
+        getFavRecipes(1);
 
-  const handleSaveButtonClick = () => {
-   
-    setIngredients(editedIngredients);
-    setEditedIngredients([]);
-    setShowSaveButton(false);
-  };
 
-  return (
-    <><List data={props.data} type={"recipe" || "ingredient"} />
-    <div>
-      <h2>My Fridge</h2>
-      {ingredients.map((ingredient) => (
-        <span
-          key={ingredient}
-          onClick={() => handleIngredientClick(ingredient)}
-          style={{
-            marginRight: '10px',
-            cursor: 'pointer',
-            color: editedIngredients.includes(ingredient) ? 'yellow' : 'black',
-          }}
-        >
-          &#9733; {ingredient}
-        </span>
-      ))}
-      {showSaveButton && (
-        <button onClick={handleSaveButtonClick}>Save</button>
-      )}
-    </div></>
-  );
+    }, [])
+
+    return (
+        <>
+            <h1>hi</h1>
+            <List data={favRecipes} type={"recipe"}/>
+        </>
+    )
 }
-
-
-
-
-
-
-
-
-
-// function Ingredients(props) {
-//     const [setShow] = useState(false);
-
-//     const handleShow = () => setShow(true);
-//     return (<div className="save">
-//         <List data={props.data} type={"recipe" || "ingredient"} />
-//         <Button variant="primary" onClick={handleShow}>save</Button>
-//     </div>
-//     );
-// }
-export default Ingredients;
