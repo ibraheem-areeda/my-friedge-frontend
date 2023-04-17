@@ -2,71 +2,64 @@ import { useState } from 'react';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 
+import Form from 'react-bootstrap/Form';
+
 
 
 
 export default function Filter(props) {
-    const [value, setValue] = useState("1")
-    
-   
-    const sendDataToParent = (data) => {
-        
-        props.onDataReceived(data);
+
+    const listParams = props.list;
+    const [state, setState] = useState({ type: "ingredient" });
+    function replace(array, obj) {
+        for (let i = 0; i < array.length; i++) {
+
+            let temp = Object.keys(array[i]);
+            let target = Object.keys(obj);
+            if (temp[0] === target[0]) {
+                array[i] = obj;
+                return;
+            }
+        }
+        array.push(obj);
     }
 
-  
-    
-
     const handleChange = (element) => {
-        setValue(element.target.value)
-        console.log(22222222, value)
-        console.log(3333333, element.target.value)
+        
+        let data = JSON.parse(element.target.value);
+        replace(listParams.current, data);
+        if (data.type !== undefined){
+            setState(data);
+            console.log(state,"this is state");
+        }
+        console.log(listParams.current,element);
+        props.test(1);
     }
 
     return (
         <>
-            <p>{`this is from filter ${props.searchRes}`}</p>
-            <button onClick={sendDataToParent}>Send data to parent</button>
-            <br />
+            <Form.Select aria-label="Default select example" onChange={handleChange}defaultValue={"chose"}>
+                <option value={JSON.stringify({ type: "ingredient" })}>Ingredient</option>
+                <option value={JSON.stringify({ type: "recipe" })}>Recipe</option>
+            </Form.Select>
 
-            <ToggleButtonGroup type="radio" name="options" >
-                <ToggleButton id="tbg-radio-1" value={1}  onChange={handleChange}>
-                    ingragant
-                </ToggleButton>
-                <ToggleButton id="tbg-radio-2" value={2} onChange={handleChange}>
-                    Recipe
-                </ToggleButton>
-
-            </ToggleButtonGroup>
-            <br />
-            {(value == 1) ? <>  </>
-                :
-
+            {(state.type === "ingredient") ? <></> :
                 <>
-                    <ToggleButtonGroup type="radio" name="cusen" defaultValue={1}>
-                        <ToggleButton id="tbg-radio-3" value={1}>
-                            American
-                        </ToggleButton>
-                        <ToggleButton id="tbg-radio-4" value={2}>
-                            Middle Eastern
-                        </ToggleButton>
 
-                    </ToggleButtonGroup>
+                    <Form.Select aria-label="Default select example" onChange={handleChange}>
+                        <option value="chose an option">chose an option</option>
+                        <option value={JSON.stringify({ cusine: "Middle Eastern" })}>Middle Eastern</option>
+                        <option value={JSON.stringify({ cusine: "American" })}>American</option>
+                    </Form.Select>
 
-                    <br />
-                    <ToggleButtonGroup type="radio" name="diet" defaultValue={1}>
-                        <ToggleButton id="tbg-radio-5" value={1}>
-                            Vegetarian
-                        </ToggleButton>
-                        <ToggleButton id="tbg-radio-6" value={2}>
-                            Ketogenic
-                        </ToggleButton>
-
-                    </ToggleButtonGroup>
+                    <Form.Select aria-label="Default select example" onChange={handleChange}>
+                        <option value="chose an option">chose an option</option>
+                        <option value={JSON.stringify({ diet: "Vegetarian" })}>Vegetarian</option>
+                        <option value={JSON.stringify({ diet: "Ketogenic" })}>Ketogenic</option>
+                    </Form.Select>
                 </>
             }
-
-
+            
         </>
     )
 

@@ -3,8 +3,7 @@ import CardApp from "../Card/Card"
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import { useState, useRef, useEffect } from 'react';
-import { Modal } from "bootstrap";
+import { useState, useRef } from 'react';
 
 function RecipeStruct(obj) {
     this.id = obj.id;
