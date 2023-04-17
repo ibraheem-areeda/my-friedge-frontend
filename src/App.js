@@ -24,7 +24,7 @@ function App() {
           <Route exact path='/' element={<></>}>
           </Route>
 
-          <Route exact path='/Favorates' element={<></>}>
+          <Route exact path='/Favorates' element={<Favorates/>}>
           </Route>
 
           <Route exact path='/Search' element={<></>}>
@@ -40,11 +40,13 @@ function App() {
 
            
         </div>
+
 {/* 
         <Recipes/>
         <StepByStepModal/> */}
 
-        <Search />
+
+        <Search /> */}
 
       </div>
     </Router>
