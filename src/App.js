@@ -2,6 +2,7 @@
 import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "./components/Home/Home"
 import Favorates from "./components/Favorates/Favorates"
@@ -17,7 +18,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <NavBar/> */}
+        <NavBar/>
         <Routes>
 
           <Route exact path='/' element={<></>}>
@@ -30,14 +31,21 @@ function App() {
           </Route>
 
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
 
         {/* add your tests in the TEST div an HTML elment */}
         
         <div id='TEST'>
+         
+
+           
         </div>
+
         <Recipes/>
         <StepByStepModal/>
+
+        <Search />
+
       </div>
     </Router>
   );
