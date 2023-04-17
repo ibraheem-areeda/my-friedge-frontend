@@ -1,27 +1,35 @@
 import { useEffect, useState } from 'react';
-
+//import List from "../List/List"
 export default function Recipes() {
 
     const [favRecipes, setFavRecipes] = useState([]);
-    async function getFavRecipes() {
-        let url = `${process.env.REACT_APP_SERVER_URL}/allRecipes`;
-
-        let response = await fetch(url, {
+    async function getFavRecipes(userID) {
+        let allRecipes = `https://my-friedge.onrender.com/allRecipes`;
+        
+        let response = await fetch(allRecipes, {
             method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            
+            },
+            query: JSON.stringify({userID:userID})
         })
 
         let recivedData = await response.json();
         setFavRecipes(recivedData)
+        console.log(2222, recivedData)
     }
     useEffect(() => {
-        getFavRecipes();
+        getFavRecipes(1);
 
 
     }, [])
 
     return (
         <>
-            <List />
+            <h1>hi</h1>
+            {/* <List data={favRecipes} type={"recipe"}/> */}
         </>
     )
 }
