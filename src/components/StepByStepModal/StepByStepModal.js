@@ -9,7 +9,7 @@ export default function StepByStepModal(props) {
     const [stepByStep, setStepByStep] = useState([]);
 
     async function recipeAnalyzedInstructions() {
-        let url =`https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=adcb275830bd44ab8aef7e4c56c45ad5`;
+        let url =`https://api.spoonacular.com/recipes/${props.ID}/analyzedInstructions?apiKey=adcb275830bd44ab8aef7e4c56c45ad5`;
         const response = await fetch(url, {
             method: "GET",
         });

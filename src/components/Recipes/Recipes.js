@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-//import List from "../List/List"
+import List from "../List/List"
 export default function Recipes() {
 
     const [favRecipes, setFavRecipes] = useState([]);
@@ -29,7 +29,7 @@ export default function Recipes() {
     return (
         <>
             <h1>hi</h1>
-            {/* <List data={favRecipes} type={"recipe"}/> */}
+            <List data={favRecipes} type={"recipe"}/>
         </>
     )
 }
