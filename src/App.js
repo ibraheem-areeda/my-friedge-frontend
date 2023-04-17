@@ -41,8 +41,10 @@ function App() {
            
         </div>
 
-        {/* <Recipes/>
-        <StepByStepModal/>
+{/* 
+        <Recipes/>
+        <StepByStepModal/> */}
+
 
         <Search /> */}
 
