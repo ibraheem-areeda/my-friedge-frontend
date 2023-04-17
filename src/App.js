@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import Recipes from "./components/Recipes/Recipes";
 import StepByStepModal from "./components/StepByStepModal/StepByStepModal";
+import SignUP from "./components/SignUP/SignUP";
 function App() {
   //IMPORTANT create .env file and make it on the same level as package.json
   let serverURL = process.env.REACT_APP_SERVER_URL;
@@ -30,6 +31,9 @@ function App() {
           <Route exact path='/Search' element={<></>}>
           </Route>
 
+          <Route exact path='/SignUp' element={<></>}>
+          </Route>
+
         </Routes>
         <Footer/>
 
@@ -40,11 +44,12 @@ function App() {
 
            
         </div>
+        {/* <SignUP /> */}
+         
+         {/* <Recipes/> */}
+        {/* <StepByStepModal/> */}
 
-        <Recipes/>
-        <StepByStepModal/>
-
-        <Search />
+        {/* <Search /> */}
 
       </div>
     </Router>
