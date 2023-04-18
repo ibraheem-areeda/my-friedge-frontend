@@ -42,45 +42,83 @@
     --font-weight-body: 400;
     --font-size-header: 26;
     --font-size-base: 15;
-    --font-h1-desktop: 35;
-    --font-h1-mobile: 32;
-    --font-h2-desktop: 20;
-    --font-h2-mobile: 18;
-    --font-h3-mobile: 20;
-    --font-h4-desktop: 17;
-    --font-h4-mobile: 15;
-    --font-h5-desktop: 15;
-    --font-h5-mobile: 13;
-    --font-h6-desktop: 14;
-    --font-h6-mobile: 12;
-    --font-mega-title-large-desktop: 65;
-    --font-rich-text-large: 17;
-    --font-rich-text-small: 13;
-    --color-video-bg: #f2f2f2;
-    --global-color-image-loader-primary: rgba(115, 94, 86, 0.06);
-    --global-color-image-loader-secondary: rgba(115, 94, 86, 0.12);
+}
+
+
+.home{
+    display: flex;
+justify-content: space-between;
+
+
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.home h1 {
+.button {
+    display: inline-block;
+    color: #FFFFFF;
+    background: rgba(255, 129, 43, 1);
+    border-radius: 100px;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-family: 'Sofia Pro', sans-serif;
+    font-weight: 900;
     text-align: center;
-    
-} 
+    border: 0px;
+    outline: none;
+  }
+
+
+
+
+
+
+ .home img{
+   width: 500px;
+   background-size: cover;
+   background-position: right bottom;
+  
+}
+.content{
+  margin: auto;
+  
+  
+}
+   
+
+  
+   .content h2{
+    font-family: 'Sofia Pro', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 70px;
+    color: #75B91D;
+    text-transform: inherit;
+    letter-spacing: inherit;
+   }
+   .content h4{
+    font-family: 'Sofia Pro', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 75px;
+  color: #735E56;
+   }
+
+   .button.large {
+    padding: 15px 40px;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
+  .button:hover {
+    color: #FFFFFF !important;
+    background: rgba(255, 129, 43, 0.8);
+  }
+
+  .home div {
+    width: 50%;}
+
