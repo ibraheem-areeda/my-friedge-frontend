@@ -89,18 +89,17 @@ export default function Search() {
     return (
         <>
         <div className="searchform">
-            <Form>
+            <Form className="form">
+                <h3 className="h3-title">Let's find what you want :</h3>
                 <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search for recipes" />
                 <div className="filter">
           <div className="filter-title">Filters:</div>
                 <Filter searchRes={searchRes} list={listParams} test={setTest}/>
                 </div>
-                <Button className="search-button" variant="primary" type="submit" onClick={getRecipes}>Search</Button>
+                <Button className="searchbutton" variant="primary" type="submit" onClick={getRecipes}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search"/></Button>
             </Form>
         </div>
-        <div className="div-search-result">
             <SearchResult className="search-result" data={searchRes} type={"ingredient"} source={"API"} />
-        </div>
         </>
  
 )
