@@ -16,7 +16,6 @@ const NavBar=()=>{
               src={logo}
               width="30"
               height="30"
-              className="d-inline-block align-top"
             />{' '}
             MY FRIDGE
           </Navbar.Brand>

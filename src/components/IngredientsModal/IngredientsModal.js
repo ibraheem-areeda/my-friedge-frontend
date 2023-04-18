@@ -2,6 +2,7 @@ import { Modal } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
 import List from '../List/List'
+import './modle.css'
 
 
 export default function IngredientsModal(props){
@@ -40,15 +41,15 @@ export default function IngredientsModal(props){
                 {(ingredients.length==0)?
                
                   <> 
-                <p>you don't have any ingredients in your inventory</p>
-                    
+                <p>You don't have any ingredients in your inventory</p>
+                    <div className="btn">
                    <a href="/Search"><Button variant="primary" type="submit"  >
                     look for ingredients 
                   </Button></a>
-        
+                     
                   <Button variant="primary" type="submit" >
                   get random recipy
-                  </Button>
+                  </Button></div>
              </>
        
                 :<><Modal.Label>Please choose the ingredients you want for your meal</Modal.Label>
@@ -57,7 +58,7 @@ export default function IngredientsModal(props){
                 </Modal.Body>
          
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={props.handleClose}>
+                  <Button  variant="secondary" onClick={props.handleClose}>
                     Close
                   </Button>
                 </Modal.Footer>

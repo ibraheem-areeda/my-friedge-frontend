@@ -3,12 +3,12 @@
     position:sticky;
     top: 0;
     left: 0;
-   padding: 25px;
+   padding: 30px;
    
   }
   
   .navbar-brand {
-    
+   
     color: #735E56;
     font-size: 24px; 
   }
@@ -19,6 +19,9 @@
   }
   
   .nav-link:hover {
+    color:rgba(255, 129, 43, 0.8);;
+  }
+  .navbar-brand:hover {
     color:rgba(255, 129, 43, 0.8);;
   }
   
@@ -42,6 +45,7 @@
     padding: 20px;
  }
  .navbar-brand img{
-width: 50px;
-height: 50px;
+width: 75px;
+height: 75px;
+
  }

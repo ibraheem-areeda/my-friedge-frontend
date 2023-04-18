@@ -24,6 +24,7 @@ export default function Home() {
 
 return(
     <>
+    <body>
     <div className="home">
 
     <div className="homeimg">
@@ -38,7 +39,8 @@ return(
     <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
     <IngredientsModal show={show} handleClose={handleClose}/></div>
         </div>
-        </>
+        
+        </body> </>
     )
 }
 
