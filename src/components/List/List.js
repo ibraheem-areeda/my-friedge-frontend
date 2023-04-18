@@ -7,14 +7,14 @@ import { useState, useRef } from 'react';
 
 function RecipeStruct(obj) {
     this.id = obj.id;
-    this.itme_image = obj.image;
+    this.item_image = obj.image;
     this.title = obj.title;
     this.userID = 1;
 }
 
 function IngredientStruct(obj) {
     this.id = obj.id;
-    this.itme_image = obj.image;
+    this.item_image = obj.image;
     this.item_name = obj.title;
     this.quantity = obj.quantity;
     this.userID = 1;
@@ -40,8 +40,8 @@ function List(props) {
         let updateURL ='/update' , deleteURL = "/delete", addURL = "/add";
         element.preventDefault();
 
-        opirationsList.current.forEach(async (item,index) => {
-            
+        opirationsList.current.forEach(async (item,index) => {     
+    console.log(11111,JSON.stringify(new IngredientStruct(item.data)));
             let method = (item.opiration === "UPDATE") ? 'PUT' : (item.opiration === "ADD") ? "POST" : 'DELETE'
             let url = baseURL;
             url += (item.opiration === "UPDATE") ? updateURL: (item.opiration === "ADD") ? addURL : deleteURL

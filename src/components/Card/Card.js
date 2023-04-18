@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function getCardData(Card) {
     let temp = Card;
     temp.title = (Card.title !== undefined) ? Card.title : (Card.name !== undefined) ? Card.name : Card.item_name;
+    temp.image= (Card.image !== undefined) ? Card.image:Card.item_image ;
     return temp;
 }
 
@@ -87,7 +88,6 @@ function CardApp(props) {
         }
         console.log(opirationsList.current)
     }
-
     return (
         <div className='Card'>
             {
@@ -114,6 +114,9 @@ function CardApp(props) {
                             <Card.Img variant="top" src={`${cardData.image}`} />
                             <Card.Body>
                                 <Card.Title>{cardData.title}</Card.Title>
+                                <Card.Text>
+                                    {cardData.quantity}
+                                </Card.Text>
                             </Card.Body>
                         </Card>
                     </>
