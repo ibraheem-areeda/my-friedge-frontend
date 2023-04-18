@@ -16,7 +16,7 @@ function IngredientStruct(obj) {
     this.id = obj.id;
     this.item_image = obj.image;
     this.item_name = obj.title;
-    this.quantity = obj.quantity;
+    this.quantity = (obj.quantity>=1)?obj.quantity:1;
     this.userID = 1;
 }
 
