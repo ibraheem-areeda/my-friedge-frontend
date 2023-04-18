@@ -6,9 +6,10 @@ import Filter from "../Filter/Filter"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useRef } from 'react';
+import { logDOM } from '@testing-library/react';
 
 
-export default function Search() {
+export default function Search(props) {
 
     const listParams = useRef([]);
     console.log(listParams.current);
@@ -23,6 +24,8 @@ export default function Search() {
 
 
     const [test, setTest] = useState(0);
+
+    
 
     const [searchRes, setSearchRes] = useState([])
 
@@ -49,7 +52,7 @@ export default function Search() {
         element.preventDefault();
 
         let params = toOneObj(listParams.current)
-        console.log(params);
+        console.log("params", params);
 
         const queryString = await Object.entries(params)
             .map(([key, value], index) => index === 0 ? "" :
@@ -69,10 +72,32 @@ export default function Search() {
 
                 },
             })
+
+
         const searchRes = await response.json();
         setSearchRes(searchRes);
         console.log(searchRes);
     }
+
+        const [data, setData] = useState([])
+          const passData = (data) => {
+            setData(data) }
+
+
+
+
+
+   
+
+
+
+        console.log("daaaataaa", data);
+
+
+
+
+
+
     //types
     // 1.ingreidentSearch
     // 2.recipeSearch
@@ -84,7 +109,7 @@ export default function Search() {
             <div className="searchform">
                 <Form>
                     <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Large text" />
-                    <Filter searchRes={searchRes} list={listParams} test={setTest} />
+                    <Filter searchRes={searchRes} list={listParams} test={setTest} passData={passData} />
                     <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
                 </Form>
             </div>
