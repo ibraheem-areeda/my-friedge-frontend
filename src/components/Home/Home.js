@@ -1,7 +1,11 @@
-import { useState, useRef } from "react";
+
+import { useState } from "react";
 import IngredientsModal from "../IngredientsModal/IngredientsModal";
 import Button from 'react-bootstrap/Button';
-import List from "../List/List";
+import './home.css'
+import home from'./home.jpg'
+
+
 
 export default function Home() {
     const [show, setShow] = useState(false);
@@ -65,15 +69,37 @@ export default function Home() {
 
     // console.log(55555555555,data);
 
-
+//  <div className="home">
+       //     <h1 >welcom to home </h1>
+        //  <h4 >are you hungry?</h4>
+       //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
+      //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
+      //  </div>
+      
     return (
 
-        <div className="home">
-            <h1 >welcom to home </h1>
-            <h4 >are you hungry?</h4>
-            <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
-            <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
+
+
+return(
+    <>
+    <body>
+    <div className="home">
+
+    <div className="homeimg">
+        <img src={home}/>
+    </div>
+
+    <div className="content">
+    <h2> Don't be confused about what you will eat today </h2>
+    <h4 >Are you hungry?
+    </h4>
+
+    <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
+    <IngredientsModal show={show} handleClose={handleClose}/></div>
+
         </div>
+        
+        </body> </>
 
     )
 }
