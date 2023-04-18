@@ -1,25 +1,30 @@
 import { Modal } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect } from "react";
+import Spinner from 'react-bootstrap/Spinner'
+import { useState, useEffect, useRef } from "react";
 import List from '../List/List'
 
 
 export default function IngredientsModal(props) {
   const [ingredients, setIngredient] = useState([]);
+  const choiceList = useRef([]);
 
-  async function getIngrediants() {
-    let url = `${process.env.REACT_APP_SERVER_URL}/allIngredient`;
-    const response = await fetch(url, {
-      method: "GET",
-    });
-    const data = await response.json();
-    setIngredient(data)
+ async function getIngrediants() {
+    let baseURL = process.env.REACT_APP_SERVER_URL;
+    let ingredientURL = '/allIngredients?userID=1';
+
+    let recipeResponse = await fetch(baseURL + ingredientURL, {
+      method: 'GET',
+    })
+
+    let recivedData = await recipeResponse.json();
+    console.log("modal favorate",recivedData);
+    setIngredient(recivedData);
   }
 
-
-
-
-
+  function getRandom(params) {
+    props.handleClose();
+  }
 
   useEffect(() => {
     getIngrediants();
@@ -36,9 +41,9 @@ export default function IngredientsModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>Ingredients</Modal.Title>
         </Modal.Header>
-
+        {/* <Spinner animation="border" /> */}
         <Modal.Body>
-          {(ingredients.length == 0) ?
+          {(ingredients===[])?<h1>loading</h1>:(ingredients.length === 0) ?
 
             <>
               <p>you don't have any ingredients in your inventory</p>
@@ -47,13 +52,15 @@ export default function IngredientsModal(props) {
                 look for ingredients
               </Button></a>
 
-              <Button variant="primary" type="submit" onClick={(e)=>props.handleClose(e)}>
+              <Button variant="primary" type="submit" onClick={getRandom}>
                 get random recipy
               </Button>
             </>
 
-            : <><Modal.Label>Please choose the ingredients you want for your meal</Modal.Label>
-              <List data={props.data} type={"choice"} /></>
+            : <>
+            <Modal.Title>Please choose the ingredients you want for your meal</Modal.Title>
+              <List data={ingredients} type={"choice"} choiceList={choiceList}/>
+              </>
           }
         </Modal.Body>
 

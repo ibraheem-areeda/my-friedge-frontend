@@ -2,7 +2,6 @@
 
 import List from '../List/List';
 
-import Form from 'react-bootstrap/Form';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Spinner from 'react-bootstrap/Spinner'
@@ -61,10 +60,10 @@ export default function Favorates() {
 
                 <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
                     <ToggleButton id="tbg-radio-1" value={"ingredient"} onChange={handleChange}>
-                        ingredient
+                       My Ingredients
                     </ToggleButton>
                     <ToggleButton id="tbg-radio-2" value={"recipe"} onChange={handleChange}>
-                        recipe
+                        My Recipes
                     </ToggleButton>
                 </ToggleButtonGroup>
             }

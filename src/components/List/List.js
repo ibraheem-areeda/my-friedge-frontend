@@ -41,7 +41,6 @@ function List(props) {
         element.preventDefault();
 
         opirationsList.current.forEach(async (item,index) => {     
-    console.log(11111,JSON.stringify(new IngredientStruct(item.data)));
             let method = (item.opiration === "UPDATE") ? 'PUT' : (item.opiration === "ADD") ? "POST" : 'DELETE'
             let url = baseURL;
             url += (item.opiration === "UPDATE") ? updateURL: (item.opiration === "ADD") ? addURL : deleteURL

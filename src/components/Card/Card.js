@@ -38,10 +38,10 @@ function CardApp(props) {
 
     function switchHandler(element) {
         if (element.target.checked) {
-            choiceList.current.splice(findIndex(choiceList, { data: new choiceStruct(cardData), opiration: "NOT_CHOSEN" }), 1);
+            choiceList.current.push({ data: new choiceStruct(cardData), opiration: "CHOSEN" });
         }
         else {
-            choiceList.current.push({ data: new choiceStruct(cardData), opiration: "NOT_CHOSEN" });
+            choiceList.current.splice(findIndex(choiceList, { data: new choiceStruct(cardData), opiration: "CHOSEN" }), 1);
 
         }
         console.log(choiceList)

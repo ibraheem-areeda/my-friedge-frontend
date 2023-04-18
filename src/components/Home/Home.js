@@ -1,25 +1,23 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import IngredientsModal from "../IngredientsModal/IngredientsModal";
 import Button from 'react-bootstrap/Button';
 import List from "../List/List";
 
 export default function Home() {
-    const [thelist, setthelist] = useState(false);
     const [show, setShow] = useState(false);
-    const [data, setdata] = useState([]);
-console.log(thelist)
+    const choiceList = useRef([]);
+    const [data, setData] = useState([]);
+
     const handleClose = () => {
         setShow(false);
-        setthelist(true)
     }
 
-    const handleShow = () => {
+   async function handleShow(){
         setShow(true);
-        setthelist(false)
     }
-     
-    
-    
+
+
+
     async function getRandomRecipe() {
 
 
@@ -35,23 +33,24 @@ console.log(thelist)
 
                 },
             })
-        const searchRes  = await response.json();
-        console.log(searchRes.recipes[0]);
+        const searchRes = await response.json();
+        console.log("Random", searchRes.recipes[0]);
 
-        function Rndomres(obj){
+        function RndomRes(obj) {
             this.image = obj.image;
             this.title = obj.title;
-            this.id  = obj.id }
-       
-        let constdata = new Rndomres(searchRes.recipes[0])
+            this.id = obj.id
+        }
 
-        setdata([constdata])
+        let constdata = new RndomRes(searchRes.recipes[0])
+
+        setData([constdata])
     }
 
 
-  
- 
-console.log(55555555555,data);
+
+
+    // console.log(55555555555,data);
 
 
     return (
@@ -59,9 +58,8 @@ console.log(55555555555,data);
         <div className="home">
             <h1 >welcom to home </h1>
             <h4 >are you hungry?</h4>
-            <Button variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
+            <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
             <IngredientsModal show={show} handleClose={(e) => handleClose(e)} />
-            <List type={"recipeSearch"} data={data}/>
         </div>
 
     )
