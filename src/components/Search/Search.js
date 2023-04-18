@@ -90,13 +90,18 @@ export default function Search() {
         <>
         <div className="searchform">
             <Form>
-                <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Large text" />
+                <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search for recipes" />
+                <div className="filter">
+          <div className="filter-title">Filters:</div>
                 <Filter searchRes={searchRes} list={listParams} test={setTest}/>
-                <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
+                </div>
+                <Button className="search-button" variant="primary" type="submit" onClick={getRecipes}>Search</Button>
             </Form>
         </div>
-            <SearchResult data={searchRes} type={"ingredient"} source={"API"} />
-            
+        <div className="div-search-result">
+            <SearchResult className="search-result" data={searchRes} type={"ingredient"} source={"API"} />
+        </div>
         </>
-    )
+ 
+)
 }
