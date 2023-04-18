@@ -6,6 +6,7 @@ import List from "../List/List";
 export default function Home() {
     const [thelist, setthelist] = useState(false);
     const [show, setShow] = useState(false);
+    const [data, setdata] = useState([]);
 console.log(thelist)
     const handleClose = () => {
         setShow(false);
@@ -16,11 +17,13 @@ console.log(thelist)
         setShow(true);
         setthelist(false)
     }
-
+     
+    
+    
     async function getRandomRecipe() {
 
 
-        const baseURL = `https://my-friedge.onrender.com/randomRecipes&number=1`;
+        const baseURL = `https://my-friedge.onrender.com/randomRecipes`;
         console.log("url base", baseURL);
 
         const response = await fetch(baseURL,
@@ -32,15 +35,23 @@ console.log(thelist)
 
                 },
             })
-        const searchRes = await response.json();
-        console.log(searchRes);
+        const searchRes  = await response.json();
+        console.log(searchRes.recipes[0]);
+
+        function Rndomres(obj){
+            this.image = obj.image;
+            this.title = obj.title;
+            this.id  = obj.id }
+       
+        let constdata = new Rndomres(searchRes.recipes[0])
+
+        setdata([constdata])
     }
 
 
-    useEffect(() => {
-        getRandomRecipe()
-    }, []);
-
+  
+ 
+console.log(55555555555,data);
 
 
     return (
@@ -50,7 +61,7 @@ console.log(thelist)
             <h4 >are you hungry?</h4>
             <Button variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
             <IngredientsModal show={show} handleClose={(e) => handleClose(e)} />
-            <List />
+            <List type={"recipeSearch"} data={data}/>
         </div>
 
     )
