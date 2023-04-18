@@ -48,8 +48,8 @@ function CardApp(props) {
     }
 
     function increaseQuantity() {
-        data.quantity += 1;
-        setCard(data);
+        cardData.quantity += 1;
+        setCard(cardData);
 
         let target = findIndex(opirationsList.current, { opiration: "UPDATE", data: data });
 
@@ -61,8 +61,9 @@ function CardApp(props) {
     }
 
     function decreaseQuantity() {
-        data.quantity -= 1;
-        setCard(data);
+        cardData.quantity -= 1;
+        console.log(cardData.quantity)
+        setCard(cardData);
 
         let target = findIndex(opirationsList.current, { opiration: "UPDATE", data: data, type: type });
         console.log("target", target)

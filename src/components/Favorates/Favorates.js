@@ -5,13 +5,14 @@ import List from '../List/List';
 import Form from 'react-bootstrap/Form';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import Spinner from 'react-bootstrap/Spinner'
 
 import { useEffect, useState } from 'react';
 import React from 'react';
 
 export default function Favorates() {
     const [favorate, setFavorate] = useState({ recipe: "loading", ingredient: "loading" });
-    const [state, setState] = useState('');
+    const [state, setState] = useState('loading');
 
     async function getFavorateRecipes() {
         let baseURL = process.env.REACT_APP_SERVER_URL;
@@ -38,8 +39,8 @@ export default function Favorates() {
         let recivedData = await recipeResponse.json();
         favorate.ingredient = recivedData;
         setFavorate(favorate);
+        console.log(favorate);
         setState('ingredient');
-        console.log(favorate)
     }
 
     const handleChange = (element) => {
@@ -55,18 +56,22 @@ export default function Favorates() {
 
     return (
         <>
-            <h2> this is Fav recipes Page</h2>
-            <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
-                <ToggleButton id="tbg-radio-1" value={"ingredient"} onChange={handleChange}>
-                    ingredient
-                </ToggleButton>
-                <ToggleButton id="tbg-radio-2" value={"recipe"} onChange={handleChange}>
-                    recipe
-                </ToggleButton>
-            </ToggleButtonGroup>
+            {(state === "loading") ?
+                <Spinner animation="border" /> :
+
+                <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
+                    <ToggleButton id="tbg-radio-1" value={"ingredient"} onChange={handleChange}>
+                        ingredient
+                    </ToggleButton>
+                    <ToggleButton id="tbg-radio-2" value={"recipe"} onChange={handleChange}>
+                        recipe
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            }
+
             {(state === "ingredient") ? <List data={favorate.ingredient} type={'ingreidentFavorate'} />
-                :(state==="recipe")? <List data={favorate.recipe} type={'recipeFavorate'} />
-                :<></>
+                : (state === "recipe") ? <List data={favorate.recipe} type={'recipeFavorate'} />
+                    : <></>
             }
         </>
     )
