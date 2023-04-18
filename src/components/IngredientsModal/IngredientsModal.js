@@ -6,29 +6,15 @@ import List from '../List/List'
 
 
 export default function IngredientsModal(props) {
-  const [ingredients, setIngredient] = useState([]);
   const choiceList = useRef([]);
+  const ingredients=props.ingredients;
 
- async function getIngrediants() {
-    let baseURL = process.env.REACT_APP_SERVER_URL;
-    let ingredientURL = '/allIngredients?userID=1';
-
-    let recipeResponse = await fetch(baseURL + ingredientURL, {
-      method: 'GET',
-    })
-
-    let recivedData = await recipeResponse.json();
-    console.log("modal favorate",recivedData);
-    setIngredient(recivedData);
-  }
+ 
 
   function getRandom(params) {
     props.handleClose();
   }
 
-  useEffect(() => {
-    getIngrediants();
-  }, [])
 
 
 
@@ -41,9 +27,8 @@ export default function IngredientsModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>Ingredients</Modal.Title>
         </Modal.Header>
-        {/* <Spinner animation="border" /> */}
         <Modal.Body>
-          {(ingredients===[])?<h1>loading</h1>:(ingredients.length === 0) ?
+          {(ingredients==="loading")?<Spinner animation="border" />:(ingredients.length === 0) ?
 
             <>
               <p>you don't have any ingredients in your inventory</p>
