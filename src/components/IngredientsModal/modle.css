@@ -37,3 +37,35 @@ height: 250px;}
     text-align: center;
     padding: 20px;
 }
+ 
+.modal-body link{
+display: flex;
+flex-wrap: wrap;
+}
+.modal-body .List{
+  display: block;
+  flex-wrap:wrap;
+  max-height:50px;
+  overflow-y:auto;
+  justify-content: space-between;
+}
+form{
+  display: flex;
+  flex-wrap:wrap;
+  max-height:150px;
+  overflow-y:auto;
+  justify-content: space-between;
+ 
+
+
+}
+form .Card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  border: 10px solid gray;
+  margin-right: 1rem;
+  border-radius: 5px 
+}
