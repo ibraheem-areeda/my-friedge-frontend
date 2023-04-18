@@ -3,7 +3,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './components/Home/Home'
 import Home from "./components/Home/Home"
 import Favorates from "./components/Favorates/Favorates"
 import Search from "./components/Search/Search";
@@ -19,8 +19,8 @@ function App() {
         <NavBar/>
         <Routes>
 
-          {/* <Route exact path='/' element={<Home/>}>
-          </Route> */}
+          <Route exact path='/' element={<Home/>}>
+          </Route>
 
           <Route exact path='/Favorates' element={<Favorates/>}>
           </Route>
