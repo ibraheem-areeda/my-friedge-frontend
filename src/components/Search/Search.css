@@ -1,19 +1,1 @@
 
-.searchform {
-    width: 50%;
-    margin: 50px auto;
-
-    }
-    
-    
-.searchform Button {
-    margin: 12px auto;
-display: block;
-width: 24%;
-    }
-
-.SearchResult form {
-    display:flex ;
-    flex-wrap: wrap;
-}
-    

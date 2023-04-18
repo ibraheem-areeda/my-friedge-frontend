@@ -3,7 +3,7 @@
     position:sticky;
     top: 0;
     left: 0;
-   padding: 30px;
+   padding: 0px;
    
   }
   
@@ -45,7 +45,7 @@
     padding: 20px;
  }
  .navbar-brand img{
-width: 75px;
-height: 75px;
+width: 100px;
+height: 100px;
 
  }

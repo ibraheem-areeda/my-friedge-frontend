@@ -21,7 +21,7 @@ export default function IngredientsModal(props) {
     <>
       <Modal show={props.show} onHide={props.handleClose} >
         <Modal.Header closeButton>
-          <Modal.Title>Are you ready to be a chife?</Modal.Title>
+          <Modal.Title className="head"> Are you ready to be a chife?</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
