@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState,useRef } from "react";
 import IngredientsModal from "../IngredientsModal/IngredientsModal";
 import Button from 'react-bootstrap/Button';
 import './home.css'
@@ -75,14 +75,11 @@ export default function Home() {
        //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
       //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
       //  </div>
-      
-    return (
 
 
 
 return(
     <>
-    <body>
     <div className="home">
 
     <div className="homeimg">
@@ -95,11 +92,10 @@ return(
     </h4>
 
     <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
-    <IngredientsModal show={show} handleClose={handleClose}/></div>
+    <IngredientsModal show={show} ingredients={ingredients} handleClose={handleClose}/></div>
 
         </div>
-        
-        </body> </>
+         </>
 
     )
 }
