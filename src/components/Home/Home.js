@@ -10,17 +10,30 @@ import home from'./home.jpg'
 export default function Home() {
     const [show, setShow] = useState(false);
     const choiceList = useRef([]);
+    const [ingredients, setIngredient] = useState([]);
     const [data, setData] = useState([]);
 
     const handleClose = () => {
         setShow(false);
     }
 
-   async function handleShow(){
+    async function handleShow() {
         setShow(true);
+        getIngrediants();
     }
 
+    async function getIngrediants() {
+        let baseURL = process.env.REACT_APP_SERVER_URL;
+        let ingredientURL = '/allIngredients?userID=1';
+        setIngredient("loading");
+        let recipeResponse = await fetch(baseURL + ingredientURL, {
+            method: 'GET',
+        })
 
+        let recivedData = await recipeResponse.json();
+        console.log("modal favorate", recivedData);
+        setIngredient(recivedData);
+    }
 
     async function getRandomRecipe() {
 
@@ -58,12 +71,13 @@ export default function Home() {
 
 //  <div className="home">
        //     <h1 >welcom to home </h1>
-          //  <h4 >are you hungry?</h4>
+        //  <h4 >are you hungry?</h4>
        //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
-      //      <IngredientsModal show={show} handleClose={(e) => handleClose(e)} />
+      //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
       //  </div>
       
     return (
+
 
 
 return(
@@ -82,6 +96,7 @@ return(
 
     <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
     <IngredientsModal show={show} handleClose={handleClose}/></div>
+
         </div>
         
         </body> </>
