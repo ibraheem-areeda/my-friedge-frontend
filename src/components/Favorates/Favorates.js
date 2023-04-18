@@ -1,5 +1,5 @@
 
-
+import "./Favorates.css"
 import List from '../List/List';
 
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
