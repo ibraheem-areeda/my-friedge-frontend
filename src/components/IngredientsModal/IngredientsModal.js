@@ -42,9 +42,9 @@ export default function IngredientsModal(props){
                   <> 
                 <p>you don't have any ingredients in your inventory</p>
                     
-                    <Button variant="primary" type="submit"  >
+                   <a href="/Search"><Button variant="primary" type="submit"  >
                     look for ingredients 
-                  </Button>
+                  </Button></a>
         
                   <Button variant="primary" type="submit" >
                   get random recipy
