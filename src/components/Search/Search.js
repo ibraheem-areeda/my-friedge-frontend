@@ -16,6 +16,7 @@ export default function Search() {
     const [inputValue, setInputValue] = useState('');
     console.log("text input val=", inputValue);
     const handleInputChange = (event) => {
+        console.log(event);
         setInputValue(event.target.value);
     }
 
@@ -83,7 +84,7 @@ export default function Search() {
         <>
             <div className="searchform">
                 <Form>
-                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Large text" />
+                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required/>
                     <Filter searchRes={searchRes} list={listParams} test={setTest} />
                     <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
                 </Form>
