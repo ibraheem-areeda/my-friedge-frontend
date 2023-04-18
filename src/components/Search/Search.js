@@ -1,23 +1,25 @@
 
+import '../Search/Search.css';
+
 import SearchResult from "../SearchResult/SearchResult";
 import Filter from "../Filter/Filter"
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
-import  '../Search/Search.css';
+import { useState, useRef } from 'react';
+
 
 export default function Search() {
 
     const listParams = useRef([]);
     console.log(listParams.current);
-    
+
     const [inputValue, setInputValue] = useState('');
-    console.log("text input val=",inputValue);
-      const handleInputChange = (event) => {
+    console.log("text input val=", inputValue);
+    const handleInputChange = (event) => {
         setInputValue(event.target.value);
     }
-    
-  
+
+
 
 
     const [test, setTest] = useState(0);
@@ -40,63 +42,67 @@ export default function Search() {
     function toOneObj(arr) {
         const obj = arr.reduce((result, current) => {
             return { ...result, ...current };
-          }, {});
-          return obj
+        }, {});
+        return obj
     }
 
-   function queryString(obj) {
+    function queryString(obj) {
 
-    const query = Object.entries(obj)
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join("&");
+        const query = Object.entries(obj)
+            .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join("&");
     }
-      
-
-    
 
 
-    async function getRecipes(element){
-       
+
+
+
+    async function getRecipes(element) {
+
         element.preventDefault();
-        
+
         let params = toOneObj(listParams.current)
         console.log(params);
 
         const queryString = await Object.entries(params)
-    .map(([key, value],index) =>index==0?"":
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-          .join("&");
+            .map(([key, value], index) => index === 0 ? "" :
+                `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join("&");
 
         console.log(queryString);
-        const baseURL= `https://my-friedge.onrender.com/complexSearch?query=${inputValue}&${queryString}&number=10`;
-        console.log("url base",baseURL);
+        const baseURL = `https://my-friedge.onrender.com/complexSearch?query=${inputValue}&${queryString}&number=10`;
+        console.log("url base", baseURL);
 
         const response = await fetch(baseURL,
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
 
-            },
-         } )
+                },
+            })
         const searchRes = await response.json();
         setSearchRes(searchRes);
         console.log(searchRes);
     }
- 
-
+    //types
+    // 1.ingreidentSearch
+    // 2.recipeSearch
+    // 3.recipeFavorate
+    // 4.ingreidentFavorate
+    // 5.choice
     return (
         <>
-        <div className="searchform">
-            <Form>
-                <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Large text" />
-                <Filter searchRes={searchRes} list={listParams} test={setTest}/>
-                <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
-            </Form>
-        </div>
-            <SearchResult data={searchRes} type={"ingredient"} source={"API"} />
-            
+            <div className="searchform">
+                <Form>
+                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Large text" />
+                    <Filter searchRes={searchRes} list={listParams} test={setTest} />
+                    <Button variant="primary" type="submit" onClick={getRecipes}>Search</Button>
+                </Form>
+            </div>
+            <SearchResult data={searchRes} type={"ingreidentSearch"} />
+
         </>
     )
 }

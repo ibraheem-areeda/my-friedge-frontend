@@ -1,52 +1,77 @@
-import logo from './logo.jpg'
-import Card from '../Card/Card'
+
+
+import List from '../List/List';
+
+import Form from 'react-bootstrap/Form';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+
+import { useEffect, useState } from 'react';
 import React from 'react';
-import  Button  from 'react-bootstrap/Button';
-import {useEffect, useState} from 'react';
 
-export default function Favorates(){
-const [favRecipes,setFavRecipes ] = useState([]);
-async function getFavRecipes(){
-        let url =`${process.env.REACT_APP_SERVER_URL}/favRecipes`;
+export default function Favorates() {
+    const [favorate, setFavorate] = useState({ recipe: "loading", ingredient: "loading" });
+    const [state, setState] = useState('');
 
-        let response = await fetch(url,{
+    async function getFavorateRecipes() {
+        let baseURL = process.env.REACT_APP_SERVER_URL;
+        let recipeURL = '/allRecipes?userID=1';
+
+
+        let recipeResponse = await fetch(baseURL + recipeURL, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            
-            },
-})
+        })
 
-        let recivedData = await response.json();
-        setFavRecipes(recivedData)
-console.log(response)
-}
-useEffect(()=>{
-    getFavRecipes();
-},[])
-  
-
-
-return(<>
- <img src={logo} alt="My logo" className="logo" style={{width: '100px', height: 'auto'}} />
-<h2> this is Fav recipes Page</h2>
-{
-
-favRecipes && favRecipes.map(recipe=>{
-    return(<>
-<Card></Card>
- <Button variant="primary" onClick={()=>setFavRecipes(recipe.id)}> My Ingredants </Button>
-<Button variant="primary" onClick={()=>setFavRecipes(recipe.id)}> My recipe </Button>
-<Button>save</Button></>
-)
-    })
+        let recivedData = await recipeResponse.json();
+        favorate.recipe = recivedData;
+        setFavorate(favorate);
     }
 
-</>
-)
+    async function getFavorateIngredients() {
+        let baseURL = process.env.REACT_APP_SERVER_URL;
+        let ingredientURL = '/allIngredients?userID=1';
 
-    
+        let recipeResponse = await fetch(baseURL + ingredientURL, {
+            method: 'GET',
+        })
+
+        let recivedData = await recipeResponse.json();
+        favorate.ingredient = recivedData;
+        setFavorate(favorate);
+        setState('ingredient');
+        console.log(favorate)
+    }
+
+    const handleChange = (element) => {
+        setState(element.target.value);
+        console.log(element.target.value);
+    }
+    useEffect(() => {
+        getFavorateRecipes();
+        getFavorateIngredients();
+    }, [])
+
+
+
+    return (
+        <>
+            <h2> this is Fav recipes Page</h2>
+            <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
+                <ToggleButton id="tbg-radio-1" value={"ingredient"} onChange={handleChange}>
+                    ingredient
+                </ToggleButton>
+                <ToggleButton id="tbg-radio-2" value={"recipe"} onChange={handleChange}>
+                    recipe
+                </ToggleButton>
+            </ToggleButtonGroup>
+            {(state === "ingredient") ? <List data={favorate.ingredient} type={'ingreidentFavorate'} />
+                :(state==="recipe")? <List data={favorate.recipe} type={'recipeFavorate'} />
+                :<></>
+            }
+        </>
+    )
+
+
 
 
 

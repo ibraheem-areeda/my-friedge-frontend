@@ -39,13 +39,14 @@ function List(props) {
         let baseURL = process.env.REACT_APP_SERVER_URL;
         let updateURL ='/update' , deleteURL = "/delete", addURL = "/add";
         element.preventDefault();
+
         opirationsList.current.forEach(async (item,index) => {
             
             let method = (item.opiration === "UPDATE") ? 'PUT' : (item.opiration === "ADD") ? "POST" : 'DELETE'
             let url = baseURL;
             url += (item.opiration === "UPDATE") ? updateURL: (item.opiration === "ADD") ? addURL : deleteURL
             
-            if (item.type === "ingredient" || item.type==="favorate") {
+            if (item.type === "ingreidentFavorate" || item.type==="ingreidentSearch") {
                 let response = await fetch(url+"Ingredient", {
                     method: method,
                     headers: {
@@ -79,13 +80,14 @@ function List(props) {
     return (
         <Form>
             {data.map((obj, index) => {
-                if (showMore === true || index <= showLimit) {
+                if (showMore === true || index < showLimit) {
                     return (<CardApp data={obj} type={type} opirationsList={opirationsList} key={obj.id} choiceList={props.choiceList}/>);
                 }
                 else
                     return;
             })}
-            <Button variant="outline-primary" onClick={toggleShowMore}>Show More</Button>
+
+            {(data.length>=showLimit)?<Button variant="outline-primary" onClick={toggleShowMore}>Show More</Button>:<></>}
             <Button variant="primary" type="submit" onClick={executeOpirations}>Save</Button>
         </Form>
     )
