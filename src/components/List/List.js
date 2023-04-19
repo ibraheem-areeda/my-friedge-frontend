@@ -1,7 +1,6 @@
 
 import CardApp from "../Card/Card"
-
-import Form from 'react-bootstrap/Form'
+import "./List.css"
 import Button from 'react-bootstrap/Button';
 import { useState, useRef } from 'react';
 
@@ -32,7 +31,6 @@ function List(props) {
     function executeOpirations(element) {
         console.log(opirationsList);
         element.preventDefault();
-        
         if (props.type === "choice") {
             props.modalCloseHandler();
         }
@@ -77,21 +75,45 @@ function List(props) {
 
     let data = props.data;
     let type = props.type;
+    console.log("type of list", type);
+    console.log('data in list', data);
     return (
-        <Form>
-            {data.map((obj, index) => {
-                if (showMore === true || index < showLimit) {
-                    return (<CardApp data={obj} type={type} opirationsList={opirationsList} key={obj.id} choiceList={props.choiceList} />);
-                }
-                else
-                    return;
-            })}
 
-            {(data.length > showLimit) ? <Button variant="outline-primary" onClick={toggleShowMore}>Show More</Button> : <></>}
-            <Button variant="primary" type="submit" onClick={executeOpirations}>Save</Button>
-        </Form>
+        (data.length !== 0) ?
+            <div className="list-wraper">
+                <div className="cards-container">
+                    {data.map((obj, index) => {
+                        if (showMore === true || index < showLimit) {
+                            return (<CardApp data={obj} type={type} opirationsList={opirationsList} key={obj.id} choiceList={props.choiceList} />);
+                        }
+                        else
+                            return;
+                    })}
+
+
+                </div>
+
+                {(data.length > showLimit) ? <div className="submit-button">
+                    <Button variant="outline-primary" onClick={toggleShowMore}>{(!showMore) ? 'Show More' : "Show Less"}
+                    </Button>
+                </div> : <></>}
+
+                <div className="submit-button">
+                    <Button variant="primary" type="submit" onClick={executeOpirations}>Save</Button>
+                </div>
+            </div>
+
+            : <h1>List is Empty</h1>
+
     )
 
 }
 export default List;
+
+//List types
+    // 1.ingreidentSearch
+    // 2.recipeSearch
+    // 3.recipeFavorate
+    // 4.ingreidentFavorate
+    // 5.choice
 

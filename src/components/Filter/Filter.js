@@ -10,9 +10,6 @@ import Form from 'react-bootstrap/Form';
 
  function Filter (props) {
 
-    const [pra, setpra] = useState({ type: "ingredient" });
-    console.log(7777777,pra);
-
     const listParams = props.list;
     const [state, setState] = useState({ type: "ingredient" });
     function replace(array, obj) {
@@ -34,28 +31,17 @@ import Form from 'react-bootstrap/Form';
         replace(listParams.current, data);
         if (data.type !== undefined){
             setState(data);
-            console.log(state,"this is state");
         }
         console.log(listParams.current,element);
 
-        // props.test(1);
     }
-    
-
-    
-    
-        const sample = "ingredient"
-    
-        const onClick = () => {
-          props.passData(sample)
-        }
     
  
 
     return (
         <>
             <Form.Select aria-label="Default select example" onChange={handleChange}defaultValue={"chose"}>
-                <option onChange={onClick}  value={JSON.stringify({ type: "ingredient" })}>Ingredient</option>
+                <option value={JSON.stringify({ type: "ingredient" })}>Ingredient</option>
                 <option value={JSON.stringify({ type: "recipe" })}>Recipe</option>
             </Form.Select>
 

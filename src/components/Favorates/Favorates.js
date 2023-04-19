@@ -45,7 +45,6 @@ export default function Favorates() {
 
     const handleChange = (element) => {
         setState(element.target.value);
-        console.log(element.target.value);
     }
     useEffect(() => {
         getFavorateRecipes();
@@ -59,7 +58,7 @@ export default function Favorates() {
             {(state === "loading") ?
                 <Spinner animation="border" /> :
 
-                <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
+                <ToggleButtonGroup type="radio" name="options" defaultValue={1} className="favorite-buttons-container">
                     <ToggleButton id="tbg-radio-1" value={"ingredient"} onChange={handleChange}>
                        My Ingredients
                     </ToggleButton>
