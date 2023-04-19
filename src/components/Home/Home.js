@@ -40,6 +40,7 @@ export default function Home() {
     async function getFavorateIngredients() {
         let baseURL = process.env.REACT_APP_SERVER_URL;
         let ingredientURL = '/allIngredients?userID=1';
+        console.log("main",ingredientURL);
         setIngredient("loading");
         let recipeResponse = await fetch(baseURL + ingredientURL, {
             method: 'GET',

@@ -72,7 +72,7 @@ export default function Search(props) {
 
 
         const searchRes = await response.json();
-        setSearchRes(searchRes);
+        setSearchRes(searchRes.results);
         console.log(searchRes);
     }
 
