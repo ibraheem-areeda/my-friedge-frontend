@@ -32,7 +32,7 @@ function CardApp(props) {
     let data = props.data;
     let type = props.type;
     const [cardData, setCard] = useState(getCardData(data));
-    const [starClass, setClass] = useState((type === "favorate") ? "yellow" : 'gray');
+    const [starClass, setClass] = useState((type === "recipeFavorate" || type === "ingreidentFavorate") ? "yellow-star" : 'gray-star');
 
     let opirationsList = props.opirationsList;
     let choiceList = props.choiceList;
@@ -62,12 +62,10 @@ function CardApp(props) {
     }
 
     function decreaseQuantity() {
-        cardData.quantity -= 1;
-        console.log(cardData.quantity)
-        setCard(cardData);
-
+        let temp = cardData;
+        temp.quantity -= 1;
+        setCard(temp);
         let target = findIndex(opirationsList.current, { opiration: "UPDATE", data: data, type: type });
-        console.log("target", target)
         if (target === -1)
             opirationsList.current.push({ opiration: "UPDATE", data: data });
 
@@ -77,7 +75,7 @@ function CardApp(props) {
 
     function toggleFavorate() {
 
-        setClass((starClass === "gray") ? "yellow" : "gray");
+        setClass((starClass === "gray-star") ? "yellow-star" : "gray-star");
         let baseOpiration = (type === "ingreidentFavorate" || type === "recipeFavorate") ? "DELETE" : 'ADD'
         let target = findIndex(opirationsList.current, { opiration: baseOpiration, data: data, type: type })
 
@@ -85,11 +83,12 @@ function CardApp(props) {
             opirationsList.current.push({ opiration: baseOpiration, data: data, type: type });
         }
 
-        else if (starClass) {
+        else {
             opirationsList.current.splice(target, 1);
         }
         console.log(opirationsList.current)
     }
+    console.log('card Star', starClass);
     return (
         <div className='Card'>
             {
@@ -103,15 +102,16 @@ function CardApp(props) {
                     <Form.Check type="switch" id="custom-switch" className='switch' onChange={switchHandler} />
                 </>
                     : (type === "ingreidentFavorate") ? <>
-                        <div onClick={toggleFavorate}>
-                            <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
-                        </div>
+                        <div className="card-buttons">
+                            <div onClick={toggleFavorate} className={starClass}>
+                                <FontAwesomeIcon icon="fa-solid fa-star" size="2xl" />
+                            </div>
 
-                        <div className='cardPlusMinus'>
-                            <Button variant="primary" onClick={increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-plus" /> </Button>
-                            <Button variant="danger" onClick={decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-minus" /></Button>
+                            <div className='cardPlusMinus'>
+                                <Button variant="primary" onClick={increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-plus" /> </Button>
+                                <Button variant="danger" onClick={decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-minus" /></Button>
+                            </div>
                         </div>
-
                         <Card style={{ width: '18rem' }} >
                             <Card.Img variant="top" src={`${cardData.image}`} />
                             <Card.Body>
@@ -123,8 +123,8 @@ function CardApp(props) {
                         </Card>
                     </>
                         : (type === "ingreidentSearch") ? <>
-                            <div onClick={toggleFavorate}>
-                                <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                            <div onClick={toggleFavorate}className={starClass}>
+                                <FontAwesomeIcon  icon="fa-solid fa-star" size="2xl" />
                             </div>
 
                             <Card style={{ width: '18rem' }} >
@@ -133,16 +133,16 @@ function CardApp(props) {
                                     <Card.Title>{cardData.title}</Card.Title>
                                 </Card.Body>
                             </Card>
-                        </> : (type === "recipeFavorate" || type === "recipeSearch" ) ? <>
-                            <div onClick={toggleFavorate}>
-                                <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                        </> : (type === "recipeFavorate" || type === "recipeSearch") ? <>
+                        <div onClick={toggleFavorate}className={starClass}>
+                                <FontAwesomeIcon  icon="fa-solid fa-star" size="2xl" />
                             </div>
 
                             <Card style={{ width: '18rem' }} >
                                 <Card.Img variant="top" src={`${cardData.image}`} />
                                 <Card.Body>
                                     <Card.Title>{cardData.title}</Card.Title>
-                                    <StepByStepModal id={data.id}/>
+                                    <StepByStepModal id={data.id} />
                                 </Card.Body>
                             </Card>
                         </> : <></>

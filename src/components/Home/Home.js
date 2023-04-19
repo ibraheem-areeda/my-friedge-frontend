@@ -9,6 +9,45 @@ import List from "../List/List";
 
 
 export default function Home() {
+    let mockData=[
+        {
+            "id": 71642,
+            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
+            "imageType": "jpg",
+        },
+        {
+            "id": 715538,
+            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
+            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
+            "imageType": "jpg",
+        },
+        
+        {
+            "id": 716429,
+            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
+            "imageType": "jpg",
+        },
+        {
+            "id": 71553,
+            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
+            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
+            "imageType": "jpg",
+        },
+        {
+            "id": 7164,
+            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
+            "imageType": "jpg",
+        },
+        {
+            "id": 7155,
+            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
+            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
+            "imageType": "jpg",
+        }
+    ]
     const [show, setShow] = useState(false);
     let choiceList = useRef([]);
     const [ingredients, setIngredient] = useState([]);
@@ -50,28 +89,26 @@ export default function Home() {
         setIngredient(recivedData);
     }
 
-
-    // let ingredientURL = `findByIngredients?ingredients=${JSON.stringify(choiceList.current.map(item =>{
-    //     return item.data.name;
-    // }))}`;
     async function searchByIngredient() {
-        let baseURL = process.env.REACT_APP_SERVER_URL;
-        let ingredientURL = `/findByIngredients?ingredients=[apple]`;
-        setIngredient("loading");
-        let recipeResponse = await fetch(baseURL + ingredientURL, {
-            method: 'GET',
-        })
+        // let baseURL = process.env.REACT_APP_SERVER_URL;
+        // let ingredientURL = `/findByIngredients?ingredients=[apple]`;
+        // setIngredient("loading");
+        // let recipeResponse = await fetch(baseURL + ingredientURL, {
+        //     method: 'GET',
+        // })
 
-        let recivedData = await recipeResponse.json();
-        recivedData = recivedData.map((item) => {
-            return {
-                id: item.id,
-                title: item.title,
-                image: item.image
-            }
-        })
-        console.log("by ingredient", recivedData);
-        setData(recivedData);
+        // let recivedData = await recipeResponse.json();
+        // recivedData = recivedData.map((item) => {
+        //     return {
+        //         id: item.id,
+        //         title: item.title,
+        //         image: item.image
+        //     }
+        // })
+        // console.log("by ingredient", recivedData);
+        // setData(recivedData);
+        console.log("sent data");
+        setData(mockData);
     }
 
     async function getRandomRecipe() {
@@ -94,18 +131,6 @@ export default function Home() {
         }
         setData(list);
     }
-
-
-
-    // console.log(55555555555,data);
-
-    //  <div className="home">
-    //     <h1 >welcom to home </h1>
-    //  <h4 >are you hungry?</h4>
-    //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
-    //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
-    //  </div>
-
 
 
     return (

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner'
 import { useState, useEffect, useRef } from "react";
 import List from '../List/List'
-import './modle.css'
+import './IngredientsModal.css'
 
 
 export default function IngredientsModal(props) {

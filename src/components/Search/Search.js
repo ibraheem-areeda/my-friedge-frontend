@@ -12,7 +12,6 @@ import { logDOM } from '@testing-library/react';
 export default function Search(props) {
 
     const listParams = useRef([]);
-    const [test, setTest] = useState(0);
     const [searchRes, setSearchRes] = useState([])
     const [inputValue, setInputValue] = useState('');
 
@@ -32,7 +31,6 @@ export default function Search(props) {
 
     async function getRecipes() {
         let params = toOneObj(listParams.current)
-        console.log("params", params);
 
         const queryString = await Object.entries(params)
             .map(([key, value], index) => index === 0 ? "" :
@@ -53,7 +51,13 @@ export default function Search(props) {
                 },
             })
         const searchRes = await response.json();
-        setSearchRes(searchRes);
+        if (!response.status) {
+            setSearchRes(searchRes);
+        }
+        else {
+            setSearchRes([]);
+        }
+
         console.log(searchRes);
     }
     async function getIngredients(element) {
@@ -95,7 +99,7 @@ export default function Search(props) {
     // 3.recipeFavorate
     // 4.ingreidentFavorate
     // 5.choice
-    console.log(listParams.current, 11111);
+    console.log(listParams.current);
     return (
         <>
             <div className="searchform">
@@ -103,12 +107,12 @@ export default function Search(props) {
                 <Form className="form">
                     <h3 className="h3-title">Let's find what you want :</h3>
                     <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required />
-                    <Filter searchRes={searchRes} list={listParams} test={setTest} />
+                    <Filter searchRes={searchRes} list={listParams} />
                     <Button className="searchbutton" variant="primary" type="submit" onClick={getData}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search" /></Button>
                 </Form>
 
-                {(searchRes === []) ? <></> :
-                    <SearchResult data={searchRes} type={(listParams.current[0] === 'ingredient') ? "recipeSearch" : "ingreidentSearch"} />}
+                {(searchRes === [] || listParams.current.length === 0) ? <></> :
+                    <SearchResult data={searchRes} type={(listParams.current[0].type === 'ingredient') ? "ingreidentSearch" : "recipeSearch"} />}
             </div>
 
         </>

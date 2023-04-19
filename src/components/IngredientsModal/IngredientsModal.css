@@ -4,8 +4,12 @@
     color: white;
   }
 
-  .modal-body {padding: 2px 16px;
-    height: 450px;}
+  .modal-body {
+    padding: 2px 16px;
+    height: 450px;
+    overflow-y: auto;
+  }
+
   .modal-footer {
     padding: 2px 16px;
     background-color: #75b91d;;
@@ -66,5 +70,9 @@ form{display: flex;
   }
    .head{
     color: white;
+  }
+
+  .modal-body .list-wraper .cards-container{
+    flex-direction: column;
   }
 
