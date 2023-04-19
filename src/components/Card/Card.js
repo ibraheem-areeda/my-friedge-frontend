@@ -94,7 +94,7 @@ function CardApp(props) {
             {
                 (type === "choice") ? <>
                     <Card style={{ width: '18rem' }} >
-                        <Card.Img variant="top" src={`${cardData.image}`} />
+                        <Card.Img variant="top" src={`https://spoonacular.com/cdn/ingredients_250x250/${cardData.image}`} />
                         <Card.Body>
                             <Card.Title>{cardData.title}</Card.Title>
                         </Card.Body>
