@@ -6,27 +6,23 @@ import Filter from "../Filter/Filter"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useRef } from 'react';
+import { logDOM } from '@testing-library/react';
 
 
-export default function Search() {
+export default function Search(props) {
 
     const listParams = useRef([]);
+    const [test, setTest] = useState(0);
+    const [searchRes, setSearchRes] = useState([])
+    const [inputValue, setInputValue] = useState('');
+
     console.log(listParams.current);
 
-    const [inputValue, setInputValue] = useState('');
-    console.log("text input val=", inputValue);
     const handleInputChange = (event) => {
         console.log(event);
         setInputValue(event.target.value);
     }
-
-
-
-
-    const [test, setTest] = useState(0);
-
-    const [searchRes, setSearchRes] = useState([])
-
+    
     function toOneObj(arr) {
         const obj = arr.reduce((result, current) => {
             return { ...result, ...current };
@@ -34,23 +30,9 @@ export default function Search() {
         return obj
     }
 
-    function queryString(obj) {
-
-        const query = Object.entries(obj)
-            .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-            .join("&");
-    }
-
-
-
-
-
-    async function getRecipes(element) {
-
-        element.preventDefault();
-
+    async function getRecipes() {
         let params = toOneObj(listParams.current)
-        console.log(params);
+        console.log("params", params);
 
         const queryString = await Object.entries(params)
             .map(([key, value], index) => index === 0 ? "" :
@@ -58,7 +40,7 @@ export default function Search() {
             .join("&");
 
         console.log(queryString);
-        const baseURL = `https://my-friedge.onrender.com/complexSearch?query=${inputValue}&${queryString}&number=10`;
+        const baseURL = `https://my-friedge.onrender.com/complexSearch?query=${inputValue}${queryString}&number=10`;
         console.log("url base", baseURL);
 
         const response = await fetch(baseURL,
@@ -74,23 +56,60 @@ export default function Search() {
         setSearchRes(searchRes);
         console.log(searchRes);
     }
+    async function getIngredients(element) {
+        const baseURL = `https://my-friedge.onrender.com/searchIngredients?query=${inputValue}&number=10`;
+        console.log("url base", baseURL);
+
+        const response = await fetch(baseURL,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+
+                },
+            })
+
+
+        const searchRes = await response.json();
+        setSearchRes(searchRes);
+        console.log(searchRes);
+    }
+
+
+    function getData(element) {
+        element.preventDefault();
+        if (listParams.current.length !== 0) {
+            if (listParams.current[0].type === 'ingredient') {
+                getIngredients();
+            }
+            else {
+                getRecipes();
+            }
+        }
+    }
+
     //types
     // 1.ingreidentSearch
     // 2.recipeSearch
     // 3.recipeFavorate
     // 4.ingreidentFavorate
     // 5.choice
+    console.log(listParams.current,11111);
     return (
         <>
             <div className="searchform">
+            
                 <Form className="form">
                 <h3 className="h3-title">Let's find what you want :</h3>
                     <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required/>
                     <Filter searchRes={searchRes} list={listParams} test={setTest} />
-                    <Button className="searchbutton" variant="primary" type="submit" onClick={getRecipes}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search"/></Button>
-                </Form>
-            </div>
-            <SearchResult className="search-result" data={searchRes} type={"ingreidentSearch"} />
+                    <Button className="searchbutton" variant="primary" type="submit" onClick={getData}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search"/></Button>
+                </Form>   
+           
+            {(searchRes===[])?<></>:
+            <SearchResult data={searchRes} type={(listParams.current[0] === 'ingredient')?"recipeSearch":"ingreidentSearch"} />}
+
 
         </>
     )

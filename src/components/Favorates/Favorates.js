@@ -1,7 +1,8 @@
 
-import "./Favorates.css"
-import List from '../List/List';
 
+import "./Favorates.css"
+
+import List from '../List/List';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Spinner from 'react-bootstrap/Spinner'
@@ -76,7 +77,48 @@ export default function Favorates() {
     )
 
 
+  function RecipeCards() {
+    return (
+      <>
+        {favRecipes.map((recipe) => {
+          return (
+            <>
+              <Card></Card>
+              <Button
+                variant="primary"
+                onClick={() => setFavRecipes(recipe.id)}
+              >
+                My Ingredients
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => setFavRecipes(recipe.id)}
+              >
+                My recipe
+              </Button>
+              <Button>save</Button>
+            </>
+          );
+        })}
+      </>
+    );
+  }
 
+  function MyHeader() {
+    return (
+      <>
+        <div >
+        
+          <h1> This is Favorite Page</h1>
+        </div>
+      </>
+    );
+  }
 
-
+  return (
+    <>
+      <MyHeader />
+      <RecipeCards />
+    </>
+  );
 }

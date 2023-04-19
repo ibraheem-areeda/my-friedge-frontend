@@ -5,7 +5,7 @@
   }
 
   .modal-body {padding: 2px 16px;
-height: 250px;}
+    height: 450px;}
   .modal-footer {
     padding: 2px 16px;
     background-color: #75b91d;;
@@ -37,3 +37,34 @@ height: 250px;}
     text-align: center;
     padding: 20px;
 }
+ 
+.modal-body link{
+display: flex;
+flex-wrap: wrap;
+}
+form{display: flex;
+  flex-wrap:wrap;
+  max-height:350px;
+  overflow-y:auto;
+  justify-content:center;
+}
+
+  form .Card {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 5px solid #ff812b;;
+    margin: 1rem;
+    border-radius: 5px;
+   
+  }
+   
+  .modal-title {
+    color: #735e56;
+    padding: 10px;
+  }
+   .head{
+    color: white;
+  }
+
