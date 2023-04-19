@@ -1,0 +1,55 @@
+
+.form-switch .form-check-input {
+    width: 5vh;
+    height: 3vh;
+}
+
+div.Card{
+    display: flex;
+    width: fit-content;
+    margin-bottom: 5%;
+}
+
+div.cardPlusMinus{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.gray-star svg{
+animation: to-removed 1s;
+color: gray;
+cursor: pointer;
+margin: 5px;
+}
+
+@keyframes to-favorate {
+    100% {transform: rotate(145deg);}
+}
+@keyframes to-removed {
+    100% {transform: rotate(-145deg);}
+}
+
+.yellow-star svg{
+    animation: to-favorate 1s;
+    color: gold;
+    cursor: pointer;
+    margin: 5px;
+    
+}
+
+.card-buttons{
+    background: #0000001a;
+    height: 130px;
+    border-radius: 5px 0px 0px 5px;
+    margin-top: 20px;
+    padding: 5px 2px;
+}
+
+.card-buttons .btn.btn-danger,
+ .card-buttons  .btn.btn-primary{
+    padding: 0px;
+    margin: 5px;
+
+}
+
