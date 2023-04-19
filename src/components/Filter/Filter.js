@@ -37,9 +37,8 @@ import Form from 'react-bootstrap/Form';
             console.log(state,"this is state");
         }
         console.log(listParams.current,element);
-        props.test(1);
-        setpra(listParams.current)
-        
+
+        // props.test(1);
     }
     
 
