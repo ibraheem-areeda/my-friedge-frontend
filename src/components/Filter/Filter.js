@@ -1,13 +1,17 @@
-import { useState } from 'react';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
 
 
 
-export default function Filter(props) {
+
+
+
+ function Filter (props) {
+
+    const [pra, setpra] = useState({ type: "ingredient" });
+    console.log(7777777,pra);
 
     const listParams = props.list;
     const [state, setState] = useState({ type: "ingredient" });
@@ -33,13 +37,25 @@ export default function Filter(props) {
             console.log(state,"this is state");
         }
         console.log(listParams.current,element);
-        props.test(1);
+
+        // props.test(1);
     }
+    
+
+    
+    
+        const sample = "ingredient"
+    
+        const onClick = () => {
+          props.passData(sample)
+        }
+    
+ 
 
     return (
         <>
             <Form.Select aria-label="Default select example" onChange={handleChange}defaultValue={"chose"}>
-                <option value={JSON.stringify({ type: "ingredient" })}>Ingredient</option>
+                <option onChange={onClick}  value={JSON.stringify({ type: "ingredient" })}>Ingredient</option>
                 <option value={JSON.stringify({ type: "recipe" })}>Recipe</option>
             </Form.Select>
 
@@ -67,3 +83,6 @@ export default function Filter(props) {
 
 
 }
+
+
+export default Filter

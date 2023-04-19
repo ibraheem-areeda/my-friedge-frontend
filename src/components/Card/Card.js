@@ -3,12 +3,14 @@ import './Card.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form'
+import StepByStepModal from '../StepByStepModal/StepByStepModal'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function getCardData(Card) {
     let temp = Card;
     temp.title = (Card.title !== undefined) ? Card.title : (Card.name !== undefined) ? Card.name : Card.item_name;
+    temp.image = (Card.image !== undefined) ? Card.image : Card.item_image;
     return temp;
 }
 
@@ -30,25 +32,25 @@ function CardApp(props) {
     let data = props.data;
     let type = props.type;
     const [cardData, setCard] = useState(getCardData(data));
-    const [starClass, setClass] = useState((type==="favorate")?"yellow":'gray');
+    const [starClass, setClass] = useState((type === "favorate") ? "yellow" : 'gray');
 
     let opirationsList = props.opirationsList;
     let choiceList = props.choiceList;
 
     function switchHandler(element) {
         if (element.target.checked) {
-            choiceList.current.splice(findIndex(choiceList, { data: new choiceStruct(cardData), opiration: "NOT_CHOSEN" }), 1);
+            choiceList.current.push({ data: new choiceStruct(cardData), opiration: "CHOSEN" });
         }
         else {
-            choiceList.current.push({ data: new choiceStruct(cardData), opiration: "NOT_CHOSEN" });
+            choiceList.current.splice(findIndex(choiceList, { data: new choiceStruct(cardData), opiration: "CHOSEN" }), 1);
 
         }
         console.log(choiceList)
     }
 
     function increaseQuantity() {
-        data.quantity += 1;
-        setCard(data);
+        cardData.quantity += 1;
+        setCard(cardData);
 
         let target = findIndex(opirationsList.current, { opiration: "UPDATE", data: data });
 
@@ -60,8 +62,9 @@ function CardApp(props) {
     }
 
     function decreaseQuantity() {
-        data.quantity -= 1;
-        setCard(data);
+        cardData.quantity -= 1;
+        console.log(cardData.quantity)
+        setCard(cardData);
 
         let target = findIndex(opirationsList.current, { opiration: "UPDATE", data: data, type: type });
         console.log("target", target)
@@ -75,50 +78,78 @@ function CardApp(props) {
     function toggleFavorate() {
 
         setClass((starClass === "gray") ? "yellow" : "gray");
-        let baseOpiration=(type==="favorate")?"DELETE":'ADD'
-        let target =findIndex(opirationsList.current, { opiration: baseOpiration, data: data, type: type })
+        let baseOpiration = (type === "ingreidentFavorate" || type === "recipeFavorate") ? "DELETE" : 'ADD'
+        let target = findIndex(opirationsList.current, { opiration: baseOpiration, data: data, type: type })
 
         if (target === -1) {
             opirationsList.current.push({ opiration: baseOpiration, data: data, type: type });
         }
 
-        else if(starClass){
+        else if (starClass) {
             opirationsList.current.splice(target, 1);
         }
         console.log(opirationsList.current)
     }
-
     return (
         <div className='Card'>
+            {
+                (type === "choice") ? <>
+                    <Card style={{ width: '18rem' }} >
+                        <Card.Img variant="top" src={`${cardData.image}`} />
+                        <Card.Body>
+                            <Card.Title>{cardData.title}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                    <Form.Check type="switch" id="custom-switch" className='switch' onChange={switchHandler} />
+                </>
+                    : (type === "ingreidentFavorate") ? <>
+                        <div onClick={toggleFavorate}>
+                            <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                        </div>
 
-            <div>
-                {(type !== 'choice') ?
-                    <div onClick={toggleFavorate}>
-                        <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
-                    </div>
-                    : <></>
+                        <div className='cardPlusMinus'>
+                            <Button variant="primary" onClick={increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-plus" /> </Button>
+                            <Button variant="danger" onClick={decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-minus" /></Button>
+                        </div>
 
-                }
-                {(type === "favorate") ? <div className='cardPlusMinus'>
-                    <Button variant="primary" onClick={increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-plus" /> </Button>
-                    <Button variant="danger" onClick={decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-minus" /></Button>
-                </div> : <></>
-                }
-            </div>
+                        <Card style={{ width: '18rem' }} >
+                            <Card.Img variant="top" src={`${cardData.image}`} />
+                            <Card.Body>
+                                <Card.Title>{cardData.title}</Card.Title>
+                                <Card.Text>
+                                    {cardData.quantity}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </>
+                        : (type === "ingreidentSearch") ? <>
+                            <div onClick={toggleFavorate}>
+                                <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                            </div>
 
-            <Card style={{ width: '18rem' }} >
-                <Card.Img variant="top" src={`${cardData.image}`} />
+                            <Card style={{ width: '18rem' }} >
+                                <Card.Img variant="top" src={`${cardData.image}`} />
+                                <Card.Body>
+                                    <Card.Title>{cardData.title}</Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </> : (type === "recipeFavorate" || type === "recipeSearch" ) ? <>
+                            <div onClick={toggleFavorate}>
+                                <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                            </div>
 
-                <Card.Body>
-                    <Card.Title>{cardData.title}</Card.Title>
-                    <Card.Text>
-                        {(type === "favorate") ? cardData.quantity : <></>}
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            {(type === "choice") ? <Form.Check type="switch" id="custom-switch" className='switch' onChange={switchHandler} /> : <></>}
+                            <Card style={{ width: '18rem' }} >
+                                <Card.Img variant="top" src={`${cardData.image}`} />
+                                <Card.Body>
+                                    <Card.Title>{cardData.title}</Card.Title>
+                                    <StepByStepModal id={data.id}/>
+                                </Card.Body>
+                            </Card>
+                        </> : <></>
+            }
         </div>
     );
 }
+
 
 export default CardApp;
