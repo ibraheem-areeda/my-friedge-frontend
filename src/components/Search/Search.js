@@ -22,7 +22,7 @@ export default function Search(props) {
         console.log(event);
         setInputValue(event.target.value);
     }
-    
+
     function toOneObj(arr) {
         const obj = arr.reduce((result, current) => {
             return { ...result, ...current };
@@ -95,21 +95,21 @@ export default function Search(props) {
     // 3.recipeFavorate
     // 4.ingreidentFavorate
     // 5.choice
-    console.log(listParams.current,11111);
+    console.log(listParams.current, 11111);
     return (
         <>
             <div className="searchform">
-            
-                <Form className="form">
-                <h3 className="h3-title">Let's find what you want :</h3>
-                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required/>
-                    <Filter searchRes={searchRes} list={listParams} test={setTest} />
-                    <Button className="searchbutton" variant="primary" type="submit" onClick={getData}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search"/></Button>
-                </Form>   
-           
-            {(searchRes===[])?<></>:
-            <SearchResult data={searchRes} type={(listParams.current[0] === 'ingredient')?"recipeSearch":"ingreidentSearch"} />}
 
+                <Form className="form">
+                    <h3 className="h3-title">Let's find what you want :</h3>
+                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required />
+                    <Filter searchRes={searchRes} list={listParams} test={setTest} />
+                    <Button className="searchbutton" variant="primary" type="submit" onClick={getData}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search" /></Button>
+                </Form>
+
+                {(searchRes === []) ? <></> :
+                    <SearchResult data={searchRes} type={(listParams.current[0] === 'ingredient') ? "recipeSearch" : "ingreidentSearch"} />}
+            </div>
 
         </>
     )
