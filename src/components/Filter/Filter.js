@@ -31,7 +31,7 @@ export default function Filter(props) {
             console.log(state,"this is state");
         }
         console.log(listParams.current,element);
-        props.test(1);
+        // props.test(1);
     }
 
     return (

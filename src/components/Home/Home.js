@@ -1,28 +1,43 @@
 
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 import IngredientsModal from "../IngredientsModal/IngredientsModal";
 import Button from 'react-bootstrap/Button';
 import './home.css'
-import home from'./home.jpg'
+import home from './home.jpg'
+import List from "../List/List";
 
 
 
 export default function Home() {
     const [show, setShow] = useState(false);
-    const choiceList = useRef([]);
+    let choiceList = useRef([]);
     const [ingredients, setIngredient] = useState([]);
     const [data, setData] = useState([]);
 
-    const handleClose = () => {
+    function RandomRes(obj) {
+        this.image = obj.image;
+        this.title = obj.title;
+        this.id = obj.id
+    }
+
+    const handleClose = (e) => {
         setShow(false);
+        if (choiceList.current.length === 0) {
+            getRandomRecipe();
+        }
+        else {
+            searchByIngredient();
+        }
+        choiceList.current = [];
+        console.log(choiceList.current);
     }
 
-    async function handleShow() {
+    function handleShow() {
         setShow(true);
-        getIngrediants();
+        getFavorateIngredients();
     }
 
-    async function getIngrediants() {
+    async function getFavorateIngredients() {
         let baseURL = process.env.REACT_APP_SERVER_URL;
         let ingredientURL = '/allIngredients?userID=1';
         setIngredient("loading");
@@ -31,15 +46,36 @@ export default function Home() {
         })
 
         let recivedData = await recipeResponse.json();
-        console.log("modal favorate", recivedData);
         setIngredient(recivedData);
+    }
+
+
+    // let ingredientURL = `findByIngredients?ingredients=${JSON.stringify(choiceList.current.map(item =>{
+    //     return item.data.name;
+    // }))}`;
+    async function searchByIngredient() {
+        let baseURL = process.env.REACT_APP_SERVER_URL;
+        let ingredientURL = `/findByIngredients?ingredients=[apple]`;
+        setIngredient("loading");
+        let recipeResponse = await fetch(baseURL + ingredientURL, {
+            method: 'GET',
+        })
+
+        let recivedData = await recipeResponse.json();
+        recivedData = recivedData.map((item) => {
+            return {
+                id: item.id,
+                title: item.title,
+                image: item.image
+            }
+        })
+        console.log("by ingredient", recivedData);
+        setData(recivedData);
     }
 
     async function getRandomRecipe() {
 
-
         const baseURL = `https://my-friedge.onrender.com/randomRecipes`;
-        console.log("url base", baseURL);
 
         const response = await fetch(baseURL,
             {
@@ -51,51 +87,44 @@ export default function Home() {
                 },
             })
         const searchRes = await response.json();
-        console.log("Random", searchRes.recipes[0]);
-
-        function RndomRes(obj) {
-            this.image = obj.image;
-            this.title = obj.title;
-            this.id = obj.id
+        let list = [];
+        for (let i = 0; i < searchRes.recipes.length; i++) {
+            list.push(new RandomRes(searchRes.recipes[i]));
         }
-
-        let constdata = new RndomRes(searchRes.recipes[0])
-
-        setData([constdata])
+        setData(list);
     }
-
 
 
 
     // console.log(55555555555,data);
 
-//  <div className="home">
-       //     <h1 >welcom to home </h1>
-        //  <h4 >are you hungry?</h4>
-       //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
-      //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
-      //  </div>
+    //  <div className="home">
+    //     <h1 >welcom to home </h1>
+    //  <h4 >are you hungry?</h4>
+    //     <Button variant="primary" type="submit" onClick={handleShow}>Find a Recipe</Button>
+    //      <IngredientsModal show={show} ingredients={ingredients} handleClose={(e) => handleClose(e)} />
+    //  </div>
 
 
 
-return(
-    <>
-    <div className="home">
+    return (
+        <>
+            <div className="home">
 
-    <div className="homeimg">
-        <img src={home}/>
-    </div>
+                <div className="homeimg">
+                    <img src={home} />
+                </div>
 
-    <div className="content">
-    <h2> Don't be confused about what you will eat today </h2>
-    <h4 >Are you hungry?
-    </h4>
+                <div className="content">
+                    <h2> Don't be confused about what you will eat today </h2>
+                    <h4 >Are you hungry?
+                    </h4>
 
-    <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
-    <IngredientsModal show={show} ingredients={ingredients} handleClose={handleClose}/></div>
-
-        </div>
-         </>
+                    <Button className="button large" variant="primary" type="submit" onClick={handleShow}>find a recipe</Button>
+                    <IngredientsModal show={show} ingredients={ingredients} handleClose={handleClose} choiceList={choiceList} /></div>
+            </div>
+            {(data.length !== 0) ? <List data={data} type={"recipeSearch"} /> : <></>}
+        </>
 
     )
 }
