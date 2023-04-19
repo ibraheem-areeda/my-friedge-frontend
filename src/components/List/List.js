@@ -110,3 +110,10 @@ function List(props) {
 }
 export default List;
 
+//List types
+    // 1.ingreidentSearch
+    // 2.recipeSearch
+    // 3.recipeFavorate
+    // 4.ingreidentFavorate
+    // 5.choice
+

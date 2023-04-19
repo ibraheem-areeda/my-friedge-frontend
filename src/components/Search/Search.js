@@ -51,11 +51,12 @@ export default function Search(props) {
                 },
             })
         const searchRes = await response.json();
-        if (!response.status) {
+        if (response.status!=="500" || !response.status) {
             setSearchRes(searchRes);
         }
         else {
             setSearchRes([]);
+            console.log("empty data",response)
         }
 
         console.log(searchRes);
@@ -92,13 +93,7 @@ export default function Search(props) {
             }
         }
     }
-
-    //types
-    // 1.ingreidentSearch
-    // 2.recipeSearch
-    // 3.recipeFavorate
-    // 4.ingreidentFavorate
-    // 5.choice
+    
     console.log(listParams.current);
     return (
         <>

@@ -67,7 +67,7 @@ export default function Footer() {
 
       <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         © 2023 Copyright
-        <a className='text-reset fw-bold' href='j' style={{ padding: '350px'  }}>
+        <a className='text-reset fw-bold' href='j' >
                   MY-FRIDGE.com
         </a>
       </div>

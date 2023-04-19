@@ -32,6 +32,12 @@ h1 {
     width: 50%;
 }
 
-.favorite-buttons-container .btn:hover{
-background-color: black;
+.favorite-buttons-container .btn:hover {
+    background-color: rgba(178, 173, 173, 0.895);
 }
+
+.favorite-buttons-container .btn-check:checked+label {
+    background-color:    #b48717;
+
+}
+

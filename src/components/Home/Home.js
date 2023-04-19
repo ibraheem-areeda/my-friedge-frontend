@@ -90,25 +90,26 @@ export default function Home() {
     }
 
     async function searchByIngredient() {
-        // let baseURL = process.env.REACT_APP_SERVER_URL;
-        // let ingredientURL = `/findByIngredients?ingredients=[apple]`;
-        // setIngredient("loading");
-        // let recipeResponse = await fetch(baseURL + ingredientURL, {
-        //     method: 'GET',
-        // })
+        let baseURL = process.env.REACT_APP_SERVER_URL;
+        let ingredientURL = `/findByIngredients?ingredients=${JSON.stringify(choiceList)}`;
+        setIngredient("loading");
+        let recipeResponse = await fetch(baseURL + ingredientURL, {
+            method: 'GET',
+        })
 
-        // let recivedData = await recipeResponse.json();
-        // recivedData = recivedData.map((item) => {
-        //     return {
-        //         id: item.id,
-        //         title: item.title,
-        //         image: item.image
-        //     }
-        // })
-        // console.log("by ingredient", recivedData);
-        // setData(recivedData);
-        console.log("sent data");
-        setData(mockData);
+        let recivedData = await recipeResponse.json();
+        recivedData = recivedData.map((item) => {
+            return {
+                id: item.id,
+                title: item.title,
+                image: item.image
+            }
+        })
+        console.log("by ingredient", recivedData);
+        setData(recivedData);
+
+        // console.log("sent data");
+        // setData(mockData);
     }
 
     async function getRandomRecipe() {

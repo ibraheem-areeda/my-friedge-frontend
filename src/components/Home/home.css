@@ -122,9 +122,20 @@ justify-content: space-between;
     background: rgba(255, 129, 43, 0.8);
   }
 
-  .home div {
-    width: 50%;}
+  .content {
+    width: 50%;
+  }
 
 body{
   margin: 0;
+}
+
+@media (max-width: 1000px)  {
+.home{
+  flex-direction: column;
+}
+.content{
+  width: 80%;
+  text-align: center;
+}
 }
