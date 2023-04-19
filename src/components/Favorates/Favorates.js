@@ -1,6 +1,8 @@
 
-import List from '../List/List';
 
+import "./Favorates.css"
+
+import List from '../List/List';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Spinner from 'react-bootstrap/Spinner'

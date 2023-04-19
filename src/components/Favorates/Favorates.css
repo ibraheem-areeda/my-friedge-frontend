@@ -1,4 +1,20 @@
 
+
+.btn-group{
+   margin-left:30%;
+   margin-top:40px;
+   margin-bottom:20px;
+   width: 40%;
+}
+.btn.btn-primary{
+    border: #75b91d;
+    background-color: #75b91d;
+    font-weight: bold;
+    margin: 30px 50px 30px 50px;
+}
+
+  
+
 h1 {
     font-size: 2em;
     color: #75b91d;
@@ -7,3 +23,4 @@ h1 {
   }
 
   
+

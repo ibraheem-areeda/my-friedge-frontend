@@ -99,16 +99,17 @@ export default function Search(props) {
     return (
         <>
             <div className="searchform">
-                <Form>
-
-                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required />
+            
+                <Form className="form">
+                <h3 className="h3-title">Let's find what you want :</h3>
+                    <Form.Control size="lg" type="text" onChange={handleInputChange} placeholder="Search..." required/>
                     <Filter searchRes={searchRes} list={listParams} test={setTest} />
-                    <Button variant="primary" type="submit" onClick={getData}>Search</Button>
-                    
-                </Form>
-            </div>
+                    <Button className="searchbutton" variant="primary" type="submit" onClick={getData}><img className="img-icon" src="https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico" alt="Search"/></Button>
+                </Form>   
+           
             {(searchRes===[])?<></>:
             <SearchResult data={searchRes} type={(listParams.current[0] === 'ingredient')?"recipeSearch":"ingreidentSearch"} />}
+
 
         </>
     )
