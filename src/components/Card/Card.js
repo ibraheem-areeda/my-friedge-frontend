@@ -3,13 +3,14 @@ import './Card.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form'
+import StepByStepModal from '../StepByStepModal/StepByStepModal'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function getCardData(Card) {
     let temp = Card;
     temp.title = (Card.title !== undefined) ? Card.title : (Card.name !== undefined) ? Card.name : Card.item_name;
-    temp.image= (Card.image !== undefined) ? Card.image:Card.item_image ;
+    temp.image = (Card.image !== undefined) ? Card.image : Card.item_image;
     return temp;
 }
 
@@ -121,7 +122,7 @@ function CardApp(props) {
                             </Card.Body>
                         </Card>
                     </>
-                        : (type === "recipeFavorate" || type === "recipeSearch" || type === "ingreidentSearch") ? <>
+                        : (type === "ingreidentSearch") ? <>
                             <div onClick={toggleFavorate}>
                                 <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
                             </div>
@@ -130,6 +131,18 @@ function CardApp(props) {
                                 <Card.Img variant="top" src={`${cardData.image}`} />
                                 <Card.Body>
                                     <Card.Title>{cardData.title}</Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </> : (type === "recipeFavorate" || type === "recipeSearch" ) ? <>
+                            <div onClick={toggleFavorate}>
+                                <FontAwesomeIcon className={starClass} icon="fa-solid fa-star" size="2xl" style={{ color: "#a4a5a8", }} />
+                            </div>
+
+                            <Card style={{ width: '18rem' }} >
+                                <Card.Img variant="top" src={`${cardData.image}`} />
+                                <Card.Body>
+                                    <Card.Title>{cardData.title}</Card.Title>
+                                    <StepByStepModal id={data.id}/>
                                 </Card.Body>
                             </Card>
                         </> : <></>
