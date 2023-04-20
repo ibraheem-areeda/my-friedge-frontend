@@ -91,6 +91,7 @@ function CardApp(props) {
     console.log('card Star', starClass);
     return (
         <div className='Card'>
+           
             {
                 (type === "choice") ? <>
                     <Card style={{ width: '18rem' }} >

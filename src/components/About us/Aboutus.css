@@ -1,0 +1,15 @@
+.aboutuscards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 50px 0px 50px;
+}
+
+.card{
+    margin: 5px 10px 10px 5px;
+    border: 3px solid rgba(27, 173, 27, 0.856);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(103, 141, 103);
+    
+
+}

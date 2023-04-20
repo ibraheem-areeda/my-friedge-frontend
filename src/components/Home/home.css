@@ -46,9 +46,10 @@
 
 
 .home{
+
     display: flex;
 justify-content: space-between;
- margin: auto;
+ margin-top: 65px;
 
 
 
@@ -78,7 +79,7 @@ justify-content: space-between;
 
 
  .home img{
-   width: 500px;
+   width: 700px;
    background-size: cover;
    background-position: right bottom;
   
@@ -102,9 +103,9 @@ justify-content: space-between;
     letter-spacing: inherit;
    }
    .content h4{
-    font-family: 'Sofia Pro', sans-serif;
-  font-style: normal;
-  font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto Slab', serif;
+    font-family: 'Shadows Into Light', cursive;
   font-size: 40px;
   line-height: 75px;
   color: #735E56;
