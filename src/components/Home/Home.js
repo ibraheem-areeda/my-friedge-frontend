@@ -9,45 +9,7 @@ import List from "../List/List";
 
 
 export default function Home() {
-    let mockData=[
-        {
-            "id": 71642,
-            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-            "imageType": "jpg",
-        },
-        {
-            "id": 715538,
-            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
-            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
-            "imageType": "jpg",
-        },
-        
-        {
-            "id": 716429,
-            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-            "imageType": "jpg",
-        },
-        {
-            "id": 71553,
-            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
-            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
-            "imageType": "jpg",
-        },
-        {
-            "id": 7164,
-            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-            "image": "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-            "imageType": "jpg",
-        },
-        {
-            "id": 7155,
-            "title": "What to make for dinner tonight?? Bruschetta Style Pork & Pasta",
-            "image": "https://spoonacular.com/recipeImages/715538-312x231.jpg",
-            "imageType": "jpg",
-        }
-    ]
+    
     const [show, setShow] = useState(false);
     let choiceList = useRef([]);
     const [ingredients, setIngredient] = useState([]);

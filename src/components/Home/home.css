@@ -139,4 +139,7 @@ body{
   width: 80%;
   text-align: center;
 }
+.home img{
+ width: 100%;
+}
 }
