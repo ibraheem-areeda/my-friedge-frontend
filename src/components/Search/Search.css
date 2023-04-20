@@ -1,0 +1,141 @@
+
+/* .searchform {
+    width: 50%;
+    margin: 50px auto;
+
+    }
+    
+    
+.searchform Button {
+    margin: 12px auto;
+display: block;
+width: 24%;
+    }
+
+.SearchResult form {
+    display:flex ;
+    flex-wrap: wrap;
+} */
+:root {
+    --background-form-color: #75b91d;
+    --h3-title-color: #444444;
+    --background-button-color: #75b91d;
+  }
+
+
+  .form { 
+background-image: url("../IngredientsModal/flying-green-leaves-2C6J3DF.png");
+    padding: 10px 10px 50px 10px;
+    width: 400px; 
+    margin: 20px auto 40px auto;
+    padding: 20px; 
+    overflow:visible;
+    border: 3px solid #ddd; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px 5px #ddd ;
+  }
+  .h3-title{
+    margin-bottom: 25px;
+    color: var(--h3-title-color) ;
+  }
+  .searchform {
+   
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-control {
+      width: 80%;
+      background: #ecf0f3;
+      padding: 10px;
+      padding-left: 20px;
+      height: 50px;
+      font-size: 14px;
+      border-radius: 50px;
+      box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    }
+    .filter {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .filter-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--h3-title-color) ;
+    }
+    
+  .searchbutton {
+   
+    width: 50%;
+    margin-top: 15px;
+    margin-left: 90px;
+
+    border: none;
+    }
+    .img-icon {
+      width: 50px;
+      height: 50px;
+      border: none;
+    }
+  
+    .form-select{
+      width: 80%;
+      
+      background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    }
+
+    .searchbutton.btn.btn-primary{
+    
+    }
+
+
+
+.imgandform {
+padding-top: 40px;
+}
+
+
+
+
+  
+
+
+
+
+
+
+
+  /* .btn-outline-primary{
+    background-color: var(--background-button-color);
+      height: 100%;
+      width: 10%;
+      color: white;
+      margin-left: 35px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  .btn-primary{
+    background-color: var(--background-button-color);
+    height: 100%;
+    width: 10%;
+    color: white;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    } */
+    
+    
+

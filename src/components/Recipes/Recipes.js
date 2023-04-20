@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import List from "../List/List"
-export default function Ingredants() {
+export default function Recipes() {
 
     const [favRecipes, setFavRecipes] = useState([]);
     async function getFavRecipes(userID) {

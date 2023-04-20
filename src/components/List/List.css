@@ -1,0 +1,11 @@
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.list-wraper .submit-button ,.list-wraper .show-more-button {
+    width: fit-content;
+    margin: auto;
+}
+

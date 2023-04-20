@@ -1,0 +1,93 @@
+
+
+.modal-dialog{
+  box-shadow: 0 0 20px #5f8d24;
+
+  background-size:auto;
+}
+
+.modal-header {
+  background-image: url(../IngredientsModal/flying-green-leaves-2C6J3DF\ heder.png) ;
+    padding: 2px 16px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    color: white;
+    
+  }
+
+  .modal-body {
+    padding: 2px 16px;
+    height: 450px;
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    background-image: url(../IngredientsModal/flying-green-leaves-2C6J3DF\ heder.png);
+    padding: 2px 16px;
+    background-position-x:right;
+    color: white;
+  }
+  
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  .modal-body button {
+    display: inline-block;
+    color: #FFFFFF;
+    background: rgba(255, 129, 43, 1);
+    border-radius: 100px;
+    padding: 10px 30px 10px 30px;
+    text-transform: uppercase;
+    font-family: 'Sofia Pro', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    border: 0px;
+    outline: none;
+  }
+  .modal-body button:hover {
+    color: #FFFFFF !important;
+    background: rgba(255, 129, 43, 0.8);
+  }
+.modal-body p{
+    text-align: center;
+    padding: 20px;
+}
+ 
+.modal-body link{
+display: flex;
+flex-wrap: wrap;
+}
+
+form{display: flex;
+  flex-wrap:wrap;
+  max-height:350px;
+  overflow-y:auto;
+  justify-content:center;
+}
+
+  form .Card {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 5px solid #ff812b;
+    margin: 1rem;
+    border-radius: 5px;
+   
+  }
+   
+  .modal-title {
+    color: #735e56;
+    padding: 10px;
+    font-size: 16px;
+  }
+   .head{
+    color:  #ff812b;
+    font-size: 24px;
+  }
+
+  .modal-body .list-wraper .cards-container{
+    flex-direction: column;
+  }
+
